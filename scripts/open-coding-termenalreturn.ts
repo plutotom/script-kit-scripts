@@ -21,11 +21,11 @@ let selectedFolder = await arg(
   }))
 );
 
-if (selectedFolder == "Make New Folder") {
+if (selectedFolder == "/Users/plutotom/Documents/coding/Make New Folder") {
   // Give new prompt asking for folder name, on return create new folder, cd into it, and open termnal at it
   let folderName = await arg("Folder Name?");
   await $`mkdir ~/Documents/coding/${folderName}`;
-  await $`open -a Terminal ~/Documents/coding/${folderName}`;
+  await $`code ~/Documents/coding/${folderName}`;
 }
 
 edit(selectedFolder);

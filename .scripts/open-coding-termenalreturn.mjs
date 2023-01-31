@@ -1,4 +1,4 @@
-// .kenv/kenvs/plutotom/scripts/open-coding-termenalreturn.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/open-coding-termenalreturn.ts
 import "@johnlindquist/kit";
 var folders = await readdir(home("Documents/coding"));
 folders.sort();
@@ -11,9 +11,9 @@ var selectedFolder = await arg(
     value: home("Documents/coding", folder)
   }))
 );
-if (selectedFolder == "Make New Folder") {
+if (selectedFolder == "/Users/plutotom/Documents/coding/Make New Folder") {
   let folderName = await arg("Folder Name?");
   await $`mkdir ~/Documents/coding/${folderName}`;
-  await $`open -a Terminal ~/Documents/coding/${folderName}`;
+  await $`code ~/Documents/coding/${folderName}`;
 }
 edit(selectedFolder);
