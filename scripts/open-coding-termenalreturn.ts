@@ -1,0 +1,33 @@
+// Name: Open Coding Project
+// Description: Open a coding project in a new terminal based on the folder name
+// Shortcut: cmd ctrl t
+
+import "@johnlindquist/kit";
+
+// list all folders in ~/Documents/coding
+// let folders = await ls("~/Documents/coding");
+let folders = await readdir(home("Documents/coding"));
+//sort folders alphabetically
+folders.sort();
+// adds "Make New Folder" to the top of the list
+folders.unshift("Make New Folder");
+
+let selectedFolder = await arg(
+  "Pick a project",
+  folders.map((folder) => ({
+    name: folder,
+    description: home("coding", folder),
+    value: home("Documents/coding", folder),
+  }))
+);
+
+if (selectedFolder == "Make New Folder") {
+  // Give new prompt asking for folder name, on return create new folder, cd into it, and open termnal at it
+  let folderName = await arg("Folder Name?");
+  await $`mkdir ~/Documents/coding/${folderName}`;
+  await $`open -a Terminal ~/Documents/coding/${folderName}`;
+}
+
+edit(selectedFolder);
+// await $`code ${selectedFolder}`;
+// await $`open -a Terminal ${selectedFolder}`;
