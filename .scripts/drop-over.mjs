@@ -1,4 +1,4 @@
-// .kenv/kenvs/plutotom/scripts/drop-over.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/drop-over.ts
 import "@johnlindquist/kit";
 var fileInfos = await drop({
   placeholder: "placeholder"
