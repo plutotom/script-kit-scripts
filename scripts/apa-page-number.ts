@@ -5,3 +5,4 @@
 import "@johnlindquist/kit";
 
 await keyboard.type("(p.)");
+await keyboard.pressKey(Key.Left);
