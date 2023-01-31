@@ -53,4 +53,5 @@ if (photosRes.errors) {
 
   await writeFile(filePath, buffer);
   await open(filePath);
+  await copy(buffer);
 }
