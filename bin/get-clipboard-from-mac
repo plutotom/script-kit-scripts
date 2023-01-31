@@ -1,0 +1,8 @@
+#!/bin/sh
+
+NODE_NO_WARNINGS=1 \
+KENV=$(cd "$(dirname ${BASH_SOURCE[0]})"/.. &> /dev/null && pwd) \
+C:\Users\pluto\.knode/bin/node \
+C:\Users\pluto\.kit/run/terminal.js \
+C:\Users\pluto\.kenv\kenvs\windows-scripts\scripts\get-clipboard-from-mac.js \
+"$@"
