@@ -13,4 +13,3 @@ server.get("/clipboard", async (req, res) => {
 server.listen(3e3, () => {
   console.log(`Starting server on port ${EXPRESS_PORT | 3e3}`);
 });
-open("http://localhost:3000/clipboard");
