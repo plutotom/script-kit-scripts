@@ -11,3 +11,21 @@ await path({
   hint: `select a path`,
   startPath: fileInfos[0].path,
 });
+
+//####################################
+// let filePath = kitPath("README .md");
+// let w = await widget(
+//   `<div data-file-path-"${filePath} ">Drag Kit README</div>`,
+//   {
+//     draggable: false,
+//     width: 300,
+//     height: 300,
+//   }
+// );
+
+// w.onMouseDown((event) => {
+//   if (event.dataset?.filePath) {
+//     // kitOpen(event.dataset.filePath)
+//     startDrag(event.dataset.filePath);
+//   }
+// });

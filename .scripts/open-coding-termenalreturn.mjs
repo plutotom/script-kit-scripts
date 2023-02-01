@@ -11,9 +11,10 @@ var selectedFolder = await arg(
     value: home("Documents/coding", folder)
   }))
 );
-if (selectedFolder == "Make New Folder") {
+if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
   await $`mkdir ~/Documents/coding/${folderName}`;
-  await $`open -a Terminal ~/Documents/coding/${folderName}`;
+  await $`code ~/Documents/coding/${folderName}`;
+} else {
+  await $`code ${selectedFolder}`;
 }
-edit(selectedFolder);

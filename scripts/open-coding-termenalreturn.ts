@@ -21,13 +21,16 @@ let selectedFolder = await arg(
   }))
 );
 
-if (selectedFolder == "Make New Folder") {
-  // Give new prompt asking for folder name, on return create new folder, cd into it, and open termnal at it
+if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
+
+  // Give new prompt asking for folder name, on return create new folder, cd into it, and open termnal at it
   await $`mkdir ~/Documents/coding/${folderName}`;
-  await $`open -a Terminal ~/Documents/coding/${folderName}`;
+  // await $`open -a Terminal ~/Documents/coding/${folderName}`;
+  await $`code ~/Documents/coding/${folderName}`;
+} else {
+  await $`code ${selectedFolder}`;
+  // await edit(selectedFolder);
 }
 
-edit(selectedFolder);
-// await $`code ${selectedFolder}`;
 // await $`open -a Terminal ${selectedFolder}`;
