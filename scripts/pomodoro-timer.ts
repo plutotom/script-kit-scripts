@@ -6,10 +6,10 @@ const notifier: typeof import("node-notifier") = await npm("node-notifier");
 
 await notifier.notify("Message");
 
-// Object
-await notifier.notify({
-  title: "My notification",
-  message: "Hello, there!",
-});
+// ask user for how much time they want to work
+let workTime: Number = await parseInt(await arg("How many minuets?"));
 
-await dev("compleate");
+await setTimeout(async () => {
+  await notify("Time to take a break!");
+  await widget("Time to Brake, you worked for " + workTime + " minuets");
+}, workTime * 60 * 1000);
