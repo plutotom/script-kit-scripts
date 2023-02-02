@@ -1,4 +1,4 @@
-// Users/plutotom/.kenv/kenvs/plutotom/scripts/start-clipboard-server.ts
+// .kenv/kenvs/plutotom/scripts/start-clipboard-server.ts
 import "@johnlindquist/kit";
 var express = await npm("express");
 var ssid = await $`networksetup -getairportnetwork en0 | cut -d ' ' -f 4`;

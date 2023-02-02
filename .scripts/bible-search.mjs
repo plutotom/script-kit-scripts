@@ -1,4 +1,4 @@
-// Users/plutotom/.kenv/kenvs/plutotom/scripts/bible-search.ts
+// .kenv/kenvs/plutotom/scripts/bible-search.ts
 import "@johnlindquist/kit";
 var bibleAPIHeaders = {
   "x-rapidapi-host": "ajith-holy-bible.p.rapidapi.com",

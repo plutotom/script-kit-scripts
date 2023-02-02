@@ -3,29 +3,47 @@
 
 import "@johnlindquist/kit";
 
-let fileInfos: [] | any = await drop({
-  placeholder: "placeholder",
-});
+// let fileInfos: [] | any = await drop({
+//   placeholder: "placeholder",
+// });
 
-await path({
-  hint: `select a path`,
-  startPath: fileInfos[0].path,
-});
+// await path({
+//   hint: `select a path`,
+//   startPath: fileInfos[0].path,
+// });
 
 //####################################
-// let filePath = kitPath("README .md");
-// let w = await widget(
-//   `<div data-file-path-"${filePath} ">Drag Kit README</div>`,
-//   {
-//     draggable: false,
-//     width: 300,
-//     height: 300,
-//   }
-// );
 
-// w.onMouseDown((event) => {
-//   if (event.dataset?.filePath) {
-//     // kitOpen(event.dataset.filePath)
-//     startDrag(event.dataset.filePath);
-//   }
-// });
+let files = [];
+
+let w = await widget(
+  `<div class="flex flex-col">
+<h2 class="text-2xl">Drop Files</h2>
+<span class="text-sm py-1 cursor-pointer" v-for="(file, index) in files" :key="file" :data-file="file">{{file}}</span>
+</div>
+`,
+  {
+    containerClass: `p-4 h-screen w-screen overflow-auto`,
+    width: 300,
+    height: 300,
+    draggable: false,
+    state: {
+      files,
+    },
+  }
+);
+
+w.onDrop((event) => {
+  if (event?.dataset?.files) {
+    files.push(...event.dataset.files);
+    w.setState({
+      files,
+    });
+  }
+});
+
+w.onMouseDown((event) => {
+  if (event.dataset.file) {
+    startDrag(event.dataset.file);
+  }
+});
