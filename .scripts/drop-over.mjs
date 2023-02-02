@@ -12,9 +12,11 @@ var w = await widget(
     width: 300,
     height: 300,
     draggable: false,
+    alwaysOnTop: true,
     state: {
       files
     }
+    // titleBarStyle: "customButtonsOnHover",
   }
 );
 w.onDrop((event) => {
@@ -26,7 +28,7 @@ w.onDrop((event) => {
   }
 });
 w.onMouseDown((event) => {
-  if (event.dataset.file) {
+  if (event.dataset?.file) {
     startDrag(event.dataset.file);
   }
 });

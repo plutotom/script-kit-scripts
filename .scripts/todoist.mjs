@@ -2,7 +2,7 @@
 import "@johnlindquist/kit";
 var { TodoistApi } = await npm("@doist/todoist-api-typescript");
 var { formatRelative } = await npm("date-fns");
-var today = new Date();
+var today = /* @__PURE__ */ new Date();
 var fromNow = (date) => formatRelative(new Date(date), today);
 function sortTaskByDueDateOrOrder(a, b) {
   const dateA = a.due?.datetime ? new Date(a.due?.datetime).getTime() : Infinity;
