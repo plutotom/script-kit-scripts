@@ -1,6 +1,5 @@
 // Name: OpenAI Chat GPT
 // Description: Query Open AI's API
-// Shortcut: cmd ctrl p
 
 import "@johnlindquist/kit";
 

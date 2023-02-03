@@ -8,12 +8,34 @@ let clipboardListener = await npm("clipboard-event");
 const { io: ioClient }: typeof import("socket.io-client") = await npm(
   "socket.io-client"
 );
+
+// make an enum that will be used to select if this is a server or client
+enum ServerType {
+  CLIENT = "CLIENT",
+  SERVER = "SERVER",
+}
+
+let SERVER_TYPE: ServerType = await env(
+  "SOCKET_SERVER_TYPE",
+  async () => await arg("select Type", [ServerType.CLIENT, ServerType.SERVER])
+);
+
 const MY_PORT = await env("MY_PORT", "My port the server should run on?");
 const SERVER_PORT = await env(
   "SERVER_PORT",
   "What is the port of the server you need to link to?"
 );
 const PC_ADDRESS = await env("PC_IP");
+
+// If this is a server then we need to start the server, if it is the client then we need to scan the network for a posable running server, then ask the user which one they want to connect to.
+if (SERVER_TYPE === "SERVER") {
+  dev("Starting server");
+} else if (SERVER_TYPE === "CLIENT") {
+  dev("Starting client");
+} else if (SERVER_TYPE === ServerType.CLIENT) {
+  dev("Starting client number 2");
+  await env("SOCKET_SERVER_TYPE", "");
+}
 
 /*// todo, scan network for port range of 3000-30010 for other running servers, 
   then we can filter that list to only ones that are kit scripts.

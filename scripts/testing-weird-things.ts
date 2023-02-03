@@ -3,8 +3,20 @@
 import "@johnlindquist/kit";
 
 // let [latest] = await getClipboardHistory();
-let [latest] = await getClipboardHistory();
-await dev(latest);
+// await dev(latest);
+
+enum ServerType {
+  CLIENT = "CLIENT",
+  SERVER = "SERVER",
+}
+
+let SERVER_TYPE: ServerType = await env(
+  "SOCKET_SERVER_TYPE",
+  async () => await arg("select Type", [ServerType.CLIENT, ServerType.SERVER])
+);
+
+await dev(SERVER_TYPE);
+
 // // #######################################
 // let heights = [320, 480, 640];
 // let choices = await heights.map((h) => {

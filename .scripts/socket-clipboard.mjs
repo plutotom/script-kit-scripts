@@ -1,4 +1,4 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/socket-clipboard.ts
+// .kenv/kenvs/windows-scripts/scripts/socket-clipboard.ts
 import "@johnlindquist/kit";
 import * as http from "http";
 var express = await npm("express");
@@ -7,12 +7,24 @@ var clipboardListener = await npm("clipboard-event");
 var { io: ioClient } = await npm(
   "socket.io-client"
 );
+var SERVER_TYPE = await env(
+  "SOCKET_SERVER_TYPE",
+  async () => await arg("select Type", ["CLIENT" /* CLIENT */, "SERVER" /* SERVER */])
+);
 var MY_PORT = await env("MY_PORT", "My port the server should run on?");
 var SERVER_PORT = await env(
   "SERVER_PORT",
   "What is the port of the server you need to link to?"
 );
 var PC_ADDRESS = await env("PC_IP");
+if (SERVER_TYPE === "SERVER") {
+  dev("Starting server");
+} else if (SERVER_TYPE === "CLIENT") {
+  dev("Starting client");
+} else if (SERVER_TYPE === "CLIENT" /* CLIENT */) {
+  dev("Starting client number 2");
+  await env("SOCKET_SERVER_TYPE", "");
+}
 var app = express();
 var server = http.createServer(app);
 var io = new Server(server);
