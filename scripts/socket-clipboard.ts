@@ -13,7 +13,7 @@ const SERVER_PORT = await env(
   "SERVER_PORT",
   "What is the port of the server you need to link to?"
 );
-const MAC_ADDRESS = await env("MAC_IP");
+const PC_ADDRESS = await env("PC_IP");
 
 /*// todo, scan network for port range of 3000-30010 for other running servers, 
   then we can filter that list to only ones that are kit scripts.
@@ -35,8 +35,10 @@ clipboardListener.startListening();
 
 clipboardListener.on("change", async () => {
   let [latest] = await getClipboardHistory();
+  let text = await paste();
+
   // emmiting should send the latest clipboard to the client
-  io.emit("Updated Clipboard", latest);
+  await io.emit("TO_WINDOWS", latest || text);
 });
 
 io.on("connection", (socket) => {
@@ -44,10 +46,12 @@ io.on("connection", (socket) => {
 });
 
 // starting listening client. This connects to computer two.
-const socketClient = await ioClient(`http://${MAC_ADDRESS}:${SERVER_PORT}`, {});
-socketClient.on("Updated Clipboard", (clipboardRes) => {
-  kit.log("recieved clipboard from server", clipboardRes.value);
-  console.log("recieved clipboard from server", clipboardRes.value);
+const socketClient = await ioClient(`http://${PC_ADDRESS}:${SERVER_PORT}`, {});
+await socketClient.on("MAC_EVENT", async (clipboardRes) => {
+  // await dev(clipboardRes.text || clipboardRes.value);
+
+  // await setClipboard(clipboardRes.value);
+  await kit.log("recieved clipboard from server", clipboardRes.value);
 });
 
 server.listen(MY_PORT, () => {
