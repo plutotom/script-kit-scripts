@@ -7,6 +7,10 @@ var clipboardListener = await npm("clipboard-event");
 var { io: ioClient } = await npm(
   "socket.io-client"
 );
+var MY_PORT = await env("My port the server should run on?");
+var SERVER_PORT = await env(
+  "What is the port of the server you need to link to?"
+);
 var app = express();
 var server = http.createServer(app);
 var io = new Server(server);
@@ -16,12 +20,14 @@ clipboardListener.on("change", async () => {
   io.emit("Updated Clipboard", latest);
 });
 io.on("connection", (socket) => {
+  console.log("a user connected");
 });
-var socketClient = await ioClient("http://localhost:3001", {});
+var socketClient = await ioClient(`http://localhost:${SERVER_PORT}`, {});
 socketClient.on("Updated Clipboard", (clipboardRes) => {
-  dev(clipboardRes.value);
+  kit.log("recieved clipboard from server", clipboardRes.value);
+  console.log("recieved clipboard from server", clipboardRes.value);
 });
-server.listen(3001, () => {
-  console.log("listening on *:3001");
+server.listen(MY_PORT, () => {
+  console.log(`listening on *:${MY_PORT}`);
 });
 await hide();
