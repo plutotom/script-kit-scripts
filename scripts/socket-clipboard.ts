@@ -34,9 +34,13 @@ const io = new Server(server);
 clipboardListener.startListening();
 
 clipboardListener.on("change", async () => {
+  // getClipboardHistory is a tool coming from kit, but it seems to not be working on windows.
   let [latest] = await getClipboardHistory();
+  // but the paste option works fine, so we will stick with it for now.
+  let text = await paste();
+  // await dev(text);
   // emmiting should send the latest clipboard to the client
-  io.emit("Updated Clipboard", latest);
+  await io.emit("MAC_EVENT", { text });
 });
 
 io.on("connection", (socket) => {
@@ -45,9 +49,15 @@ io.on("connection", (socket) => {
 
 // starting listening client. This connects to computer two.
 const socketClient = await ioClient(`http://${MAC_ADDRESS}:${SERVER_PORT}`, {});
-socketClient.on("Updated Clipboard", (clipboardRes) => {
+
+await socketClient.on("TO_WINDOWS", async (clipboardRes) => {
+  // await dev(clipboardRes.value);
   kit.log("recieved clipboard from server", clipboardRes.value);
   console.log("recieved clipboard from server", clipboardRes.value);
+});
+
+app.get("/testing", (req, res) => {
+  res.send("Hello World!");
 });
 
 server.listen(MY_PORT, () => {

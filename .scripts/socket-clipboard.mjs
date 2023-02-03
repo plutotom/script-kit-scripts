@@ -19,15 +19,19 @@ var io = new Server(server);
 clipboardListener.startListening();
 clipboardListener.on("change", async () => {
   let [latest] = await getClipboardHistory();
-  io.emit("Updated Clipboard", latest);
+  let text = await paste();
+  await io.emit("MAC_EVENT", { text });
 });
 io.on("connection", (socket) => {
   console.log("a user connected");
 });
 var socketClient = await ioClient(`http://${MAC_ADDRESS}:${SERVER_PORT}`, {});
-socketClient.on("Updated Clipboard", (clipboardRes) => {
+await socketClient.on("TO_WINDOWS", async (clipboardRes) => {
   kit.log("recieved clipboard from server", clipboardRes.value);
   console.log("recieved clipboard from server", clipboardRes.value);
+});
+app.get("/testing", (req, res) => {
+  res.send("Hello World!");
 });
 server.listen(MY_PORT, () => {
   console.log(`listening on *:${MY_PORT}`);

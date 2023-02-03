@@ -3,7 +3,8 @@
 import "@johnlindquist/kit";
 
 // let [latest] = await getClipboardHistory();
-
+let [latest] = await getClipboardHistory();
+await dev(latest);
 // // #######################################
 // let heights = [320, 480, 640];
 // let choices = await heights.map((h) => {
