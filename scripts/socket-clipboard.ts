@@ -8,10 +8,12 @@ let clipboardListener = await npm("clipboard-event");
 const { io: ioClient }: typeof import("socket.io-client") = await npm(
   "socket.io-client"
 );
-const MY_PORT = await env("My port the server should run on?");
+const MY_PORT = await env("MY_PORT", "My port the server should run on?");
 const SERVER_PORT = await env(
+  "SERVER_PORT",
   "What is the port of the server you need to link to?"
 );
+const MAC_ADDRESS = await env("MAC_IP");
 
 /*// todo, scan network for port range of 3000-30010 for other running servers, 
   then we can filter that list to only ones that are kit scripts.
@@ -42,7 +44,7 @@ io.on("connection", (socket) => {
 });
 
 // starting listening client. This connects to computer two.
-const socketClient = await ioClient(`http://localhost:${SERVER_PORT}`, {});
+const socketClient = await ioClient(`http://${MAC_ADDRESS}:${SERVER_PORT}`, {});
 socketClient.on("Updated Clipboard", (clipboardRes) => {
   kit.log("recieved clipboard from server", clipboardRes.value);
   console.log("recieved clipboard from server", clipboardRes.value);
