@@ -1,6 +1,8 @@
-// .kenv/kenvs/plutotom/scripts/start-clipboard-server.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/start-clipboard-server.ts
 import "@johnlindquist/kit";
 var express = await npm("express");
+var detectPort = await npm("detect-port");
+var PORT = await detectPort(3e3);
 var ssid = await $`networksetup -getairportnetwork en0 | cut -d ' ' -f 4`;
 var home_ssid = await env("HOME_SSID");
 if (ssid._stdout.includes(home_ssid)) {
@@ -20,9 +22,10 @@ if (ssid._stdout.includes(home_ssid)) {
       res.setHeader("Content-Type", "application/json");
       res.json({ text });
     });
-    server.listen(3e3, () => {
-      console.log(`Starting server on port ${EXPRESS_PORT | 3e3}`);
+    server.listen(PORT, () => {
+      console.log(`Starting server on port ${EXPRESS_PORT | PORT}`);
     });
-    kit.log("Starting server on port 3000");
+    kit.log("Starting server on port PORT");
   }
 }
+await hide();

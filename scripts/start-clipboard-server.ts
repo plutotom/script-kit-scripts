@@ -2,11 +2,11 @@
 // Schedule: */1 * * * *
 // Description: Starts a express server that has open port for windows pc to make get request to get clipboard contents
 
-// 0 * * * *
-
 import "@johnlindquist/kit";
 const express: typeof import("express") = await npm("express");
-// const express = await npm("express");
+const detectPort = await npm("detect-port");
+
+const PORT = await detectPort(3000);
 
 // gets the ssid of the current wifi network
 // if it's home network ssid then start the server
@@ -14,8 +14,10 @@ const ssid = await $`networksetup -getairportnetwork en0 | cut -d ' ' -f 4`;
 let home_ssid = await env("HOME_SSID");
 
 if (ssid._stdout.includes(home_ssid)) {
+  // checks to see if the server is already running.
+  // getProcesses() returns an array of objects with the scriptPath.
   let runningScripts = await kit.getProcesses();
-  // inspect(runningScripts);
+  //if the scriptPath includes the name of the script then it's running.
   let sortedScripts = await runningScripts.filter((script) => {
     return script.scriptPath.includes("start-clipboard-server");
   });
@@ -34,11 +36,13 @@ if (ssid._stdout.includes(home_ssid)) {
       res.json({ text });
     });
 
-    server.listen(3000, () => {
-      console.log(`Starting server on port ${EXPRESS_PORT | 3000}`);
+    server.listen(PORT, () => {
+      console.log(`Starting server on port ${EXPRESS_PORT | PORT}`);
     });
 
-    kit.log("Starting server on port 3000");
+    kit.log("Starting server on port PORT");
     // open("http://localhost:3000/clipboard");
   }
 }
+
+await hide();
