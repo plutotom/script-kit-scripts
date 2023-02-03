@@ -34,6 +34,7 @@ const io = new Server(server);
 clipboardListener.startListening();
 
 clipboardListener.on("change", async () => {
+  // getClipboardHistory is a tool coming from kit, but it seems to not be working on windows.
   let [latest] = await getClipboardHistory();
   let text = await paste();
 
@@ -52,6 +53,10 @@ await socketClient.on("MAC_EVENT", async (clipboardRes) => {
 
   // await setClipboard(clipboardRes.value);
   await kit.log("recieved clipboard from server", clipboardRes.value);
+});
+
+app.get("/testing", (req, res) => {
+  res.send("Hello World!");
 });
 
 server.listen(MY_PORT, () => {
