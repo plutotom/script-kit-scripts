@@ -1,4 +1,4 @@
-// Users/plutotom/.kenv/kenvs/plutotom/scripts/start-clipboard-server.ts
+// ../../../../.kenv/kenvs/windows-scripts/scripts/start-clipboard-server.ts
 import "@johnlindquist/kit";
 var express = await npm("express");
 var detectPort = await npm("detect-port");

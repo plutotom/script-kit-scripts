@@ -1,2 +1,2 @@
-// Users/plutotom/.kenv/kenvs/plutotom/scripts/testing-weird-things.ts
+// .kenv/kenvs/windows-scripts/scripts/testing-weird-things.ts
 import "@johnlindquist/kit";

@@ -1,4 +1,4 @@
-// .kenv/kenvs/plutotom/scripts/mem-to-notion.ts
+// .kenv/kenvs/windows-scripts/scripts/mem-to-notion.ts
 import "@johnlindquist/kit";
 var { MemClient } = await npm(
   "@mem-labs/mem-node"
@@ -14,7 +14,7 @@ var memClient = await new MemClient({
   apiAccessToken: memAuth
 });
 var todoistTasks = await todoistClient.getTasks().catch((error) => dev(error));
-var todaysDate = /* @__PURE__ */ new Date();
+var todaysDate = new Date();
 var dd = String(todaysDate.getDate()).padStart(2, "0");
 var mm = String(todaysDate.getMonth() + 1).padStart(2, "0");
 var yyyy = todaysDate.getFullYear();
