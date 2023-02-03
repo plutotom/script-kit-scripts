@@ -1,4 +1,4 @@
-// Users/plutotom/.kenv/kenvs/plutotom/scripts/open-coding-project.ts
+// .kenv/kenvs/plutotom/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var folders = await readdir(home("Documents/coding"));
 folders.sort();
