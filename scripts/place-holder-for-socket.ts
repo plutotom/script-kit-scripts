@@ -27,12 +27,18 @@ if (SERVER_TYPE === ServerType.SERVER) {
     });
     return posablePort;
   });
-
   // call start server function
-
   await dev("Starting server");
 } else if (SERVER_TYPE === ServerType.CLIENT) {
-  dev("Starting client");
+  // scan for running servers on and ask user to select one
+  // scan network for port range of 3000-30010 for other running servers,
+
+  let selectedServer = await arg("Select server", async () => {
+    let servers = ["server 1", "server 2", "server 3"];
+    return servers.map((server) => server);
+  });
+
+  dev({ text: "you choise was", selectedServer });
 } else {
   // reset env
   await env("SOCKET_SERVER_TYPE", { reset: true });

@@ -20,7 +20,11 @@ if (SERVER_TYPE === "SERVER" /* SERVER */) {
   });
   await dev("Starting server");
 } else if (SERVER_TYPE === "CLIENT" /* CLIENT */) {
-  dev("Starting client");
+  let selectedServer = await arg("Select server", async () => {
+    let servers = ["server 1", "server 2", "server 3"];
+    return servers.map((server) => server);
+  });
+  dev({ text: "you choise was", selectedServer });
 } else {
   await env("SOCKET_SERVER_TYPE", { reset: true });
 }
