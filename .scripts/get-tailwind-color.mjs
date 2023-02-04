@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/get-tailwind-color.ts
+// .kenv/kenvs/plutotom/scripts/get-tailwind-color.ts
 import "@johnlindquist/kit";
 var nearestColor = await npm("nearest-color");
 var colors = {

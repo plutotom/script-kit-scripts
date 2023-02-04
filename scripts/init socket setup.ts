@@ -97,5 +97,5 @@ if (flag?.scan) {
 if (choice.includes("Scan")) {
   // list out all things found on ports 3000 - 3010 on network
 } else if (choice.includes("Server")) {
-  await startSocketServer("port1", "port2", "ip1", "ip2");
+  await startSocketServer(3001, 3002, "ip1", "ip2");
 }

@@ -1,4 +1,4 @@
-// Users/plutotom/.kenv/kenvs/plutotom/scripts/init socket setup.ts
+// .kenv/kenvs/plutotom/scripts/init socket setup.ts
 import "@johnlindquist/kit";
 import * as http from "http";
 var express = await npm("express");
@@ -49,5 +49,5 @@ if (flag?.scan) {
 }
 if (choice.includes("Scan")) {
 } else if (choice.includes("Server")) {
-  await startSocketServer("port1", "port2", "ip1", "ip2");
+  await startSocketServer(3001, 3002, "ip1", "ip2");
 }

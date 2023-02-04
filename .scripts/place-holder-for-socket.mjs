@@ -1,4 +1,4 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/place-holder-for-socket.ts
+// .kenv/kenvs/plutotom/scripts/place-holder-for-socket.ts
 import "@johnlindquist/kit";
 var detectPort = await npm("detect-port");
 var SERVER_PORT = null;

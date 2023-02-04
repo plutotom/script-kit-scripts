@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/testing-new-main-menu.ts
+// .kenv/kenvs/plutotom/scripts/testing-new-main-menu.ts
 import "@johnlindquist/kit";
 onTab("Run", async (input = "") => {
   await attemptImport(kitPath("cli", "app-run.js"), "--input", input);
