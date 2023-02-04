@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/testing-weird-things.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/testing-weird-things.ts
 import "@johnlindquist/kit";
 var SERVER_TYPE = await env(
   "SOCKET_SERVER_TYPE",
