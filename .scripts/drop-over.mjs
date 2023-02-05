@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/drop-over.ts
+// .kenv/kenvs/plutotom/scripts/drop-over.ts
 import "@johnlindquist/kit";
 var files = [];
 var w = await widget(

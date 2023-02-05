@@ -3,14 +3,10 @@
 
 import "@johnlindquist/kit";
 
-// notify(`Stand up and stretch`);
+// await notify(`Stand up and stretch`);
 
 // // Name: test-cron-job
 // // Schedule: * /5 * * *
-
-// // Description: Starts a express server that has open port for windows pc to make get request to get clipboard contents
-
-// // * * * * *
 
 // import "@johnlindquist/kit";
 
@@ -21,4 +17,11 @@ import "@johnlindquist/kit";
 //   fields: [{ type: "color" }, { type: "color" }, { type: "color" }],
 // });
 
-await widget("<div>test</div>");
+// await widget("<div>test</div>");
+
+// let res = await term(`nmap -p 3000-3010 --open 192.168.1.0/24`); // scans from 192.168.1.0 to 192.168.1.255
+// let res = await term(`nmap`);
+// let res = await exec("nmap");
+let res = await $`nmap`;
+// await dev(res);
+// await hide();

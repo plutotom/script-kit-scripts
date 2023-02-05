@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/new-notion-page.ts
+// .kenv/kenvs/plutotom/scripts/new-notion-page.ts
 import "@johnlindquist/kit";
 var { Client } = await npm("@notionhq/client");
 var notionToken = await env("NOTION_USER_TOKEN");

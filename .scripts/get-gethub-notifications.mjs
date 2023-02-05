@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/get-gethub-notifications.ts
+// .kenv/kenvs/plutotom/scripts/get-gethub-notifications.ts
 import "@johnlindquist/kit";
 var { Octokit } = await npm("octokit");
 var prIcon = `<svg width="20" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

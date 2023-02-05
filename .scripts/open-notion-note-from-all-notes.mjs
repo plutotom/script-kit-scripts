@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/open-notion-note-from-all-notes.ts
+// .kenv/kenvs/plutotom/scripts/open-notion-note-from-all-notes.ts
 import "@johnlindquist/kit";
 var { Client } = await npm("@notionhq/client");
 var notionToken = await env("NOTION_USER_TOKEN");
