@@ -1,3 +1,4 @@
+// Shortcut: shift option control t
 // Name: place holder for socket
 
 import "@johnlindquist/kit";

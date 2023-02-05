@@ -1,6 +1,5 @@
 // Name: Open Coding Project
 // Description: Open a coding project in a new terminal based on the folder name
-// Shortcut: cmd ctrl t
 
 import "@johnlindquist/kit";
 
