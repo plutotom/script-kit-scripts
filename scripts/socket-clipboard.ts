@@ -39,9 +39,8 @@ clipboardListener.startListening();
 
 clipboardListener.on("change", async () => {
   // getClipboardHistory is a tool coming from kit, but it seems to not be working on windows.
-  let [latest] = await getClipboardHistory();
+  // let latest = await clipboard.readText();
   let text = await paste();
-
   // emmiting should send the latest clipboard to the client
   await io.emit("TO_SERVER_EVENT", text);
 });
@@ -55,12 +54,8 @@ io.on("connection", async (socket) => {
 // starting listening client. This connects to computer two.
 const socketClient = await ioClient(`http://${SERVER_IP}:${SERVER_PORT}`, {});
 await socketClient.on("TO_SERVER_EVENT", async (clipboardRes) => {
-<<<<<<< HEAD
-  await dev(clipboardRes.text && clipboardRes.value);
-=======
-  await dev(clipboardRes.text);
->>>>>>> f160c2b79ce91d2ec6ed4470f34a0c94a6d857ef
-  // await setClipboard(clipboardRes.value);
+  // await dev(clipboardRes);
+  await clipboard.writeText(clipboardRes);
   await kit.log("recieved clipboard from server", clipboardRes.value);
 });
 
