@@ -1,4 +1,4 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/nmap-testing-1.ts
+// .kenv/kenvs/windows-scripts/scripts/nmap-testing-1.ts
 import "@johnlindquist/kit";
 var IP = await npm("ip");
 var xml2js = await npm("xml2js");
