@@ -1,2 +1,2 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/test-cron-job.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/test-cron-job.ts
 import "@johnlindquist/kit";

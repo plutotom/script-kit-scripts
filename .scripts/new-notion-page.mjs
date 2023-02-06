@@ -1,4 +1,4 @@
-// .kenv/kenvs/windows-scripts/scripts/new-notion-page.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/new-notion-page.ts
 import "@johnlindquist/kit";
 var { Client } = await npm("@notionhq/client");
 var notionToken = await env("NOTION_USER_TOKEN");
@@ -24,9 +24,4 @@ var notion_page_res = await (async () => {
   });
   return response;
 })();
-await applescript(String.raw`
-    tell application "Notion"
-        activate
-        open location "${notion_page_res.url}"
-    end tell
-`);
+await open(notion_page_res.url);
