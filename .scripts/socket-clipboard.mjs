@@ -1,4 +1,4 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/socket-clipboard.ts
+// .kenv/kenvs/windows-scripts/scripts/socket-clipboard.ts
 import "@johnlindquist/kit";
 import * as http from "http";
 var express = await npm("express");

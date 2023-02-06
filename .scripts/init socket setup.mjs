@@ -1,4 +1,4 @@
-// .kenv/kenvs/plutotom/scripts/init socket setup.ts
+// .kenv/kenvs/windows-scripts/scripts/init socket setup.ts
 import "@johnlindquist/kit";
 import * as http from "http";
 var express = await npm("express");

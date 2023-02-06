@@ -1,4 +1,4 @@
-// .kenv/kenvs/plutotom/scripts/open-github-repository.ts
+// .kenv/kenvs/windows-scripts/scripts/open-github-repository.ts
 import "@johnlindquist/kit";
 var { Octokit } = await npm("octokit");
 var auth = await env(`GH_CLASSIC_TOKEN`, "Enter your GitHub access token");

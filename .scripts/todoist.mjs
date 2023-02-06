@@ -1,8 +1,8 @@
-// .kenv/kenvs/plutotom/scripts/todoist.ts
+// .kenv/kenvs/windows-scripts/scripts/todoist.ts
 import "@johnlindquist/kit";
 var { TodoistApi } = await npm("@doist/todoist-api-typescript");
 var { formatRelative } = await npm("date-fns");
-var today = /* @__PURE__ */ new Date();
+var today = new Date();
 var fromNow = (date) => formatRelative(new Date(date), today);
 function sortTaskByDueDateOrOrder(a, b) {
   const dateA = a.due?.datetime ? new Date(a.due?.datetime).getTime() : Infinity;
