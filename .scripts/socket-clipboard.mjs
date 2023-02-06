@@ -32,7 +32,7 @@ io.on("connection", async (socket) => {
 });
 var socketClient = await ioClient(`http://${SERVER_IP}:${SERVER_PORT}`, {});
 await socketClient.on("TO_SERVER_EVENT", async (clipboardRes) => {
-  await dev(clipboardRes.text || clipboardRes.value);
+  await dev(clipboardRes.text && clipboardRes.value);
   await kit.log("recieved clipboard from server", clipboardRes.value);
 });
 app.get("/testing", (req, res) => {

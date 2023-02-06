@@ -41,7 +41,7 @@ let res =
 
 // let res = await $`nmap -v`;
 
-await dev(res.stdout);
+// await dev(res.stdout);
 // await dev(res.stdout);
 // let res = await $`dep`; //
 // let res = await term({

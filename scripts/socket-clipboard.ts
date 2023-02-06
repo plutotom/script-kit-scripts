@@ -55,7 +55,7 @@ io.on("connection", async (socket) => {
 // starting listening client. This connects to computer two.
 const socketClient = await ioClient(`http://${SERVER_IP}:${SERVER_PORT}`, {});
 await socketClient.on("TO_SERVER_EVENT", async (clipboardRes) => {
-  await dev(clipboardRes.text || clipboardRes.value);
+  await dev(clipboardRes.text && clipboardRes.value);
   // await setClipboard(clipboardRes.value);
   await kit.log("recieved clipboard from server", clipboardRes.value);
 });
