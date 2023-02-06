@@ -1,3 +1,4 @@
+// .kenv/kenvs/plutotom/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var folders = await readdir(home("Documents/coding"));
 folders.sort();
@@ -7,7 +8,7 @@ var selectedFolder = await arg(
   folders.map((folder) => ({
     name: folder,
     description: home("coding", folder),
-    value: home("Documents/coding", folder),
+    value: home("Documents/coding", folder)
   }))
 );
 if (selectedFolder.includes("Make New Folder")) {

@@ -9,33 +9,15 @@ const { io: ioClient }: typeof import("socket.io-client") = await npm(
   "socket.io-client"
 );
 
-// make an enum that will be used to select if this is a server or client
-enum ServerType {
-  CLIENT = "CLIENT",
-  SERVER = "SERVER",
-}
-
-let SERVER_TYPE: ServerType = await env(
-  "SOCKET_SERVER_TYPE",
-  async () => await arg("select Type", [ServerType.CLIENT, ServerType.SERVER])
-);
-
 const MY_PORT = await env("MY_PORT", "My port the server should run on?");
 const SERVER_PORT = await env(
   "SERVER_PORT",
   "What is the port of the server you need to link to?"
 );
-const PC_ADDRESS = await env("PC_IP");
-
-// If this is a server then we need to start the server, if it is the client then we need to scan the network for a posable running server, then ask the user which one they want to connect to.
-if (SERVER_TYPE === "SERVER") {
-  dev("Starting server");
-} else if (SERVER_TYPE === "CLIENT") {
-  dev("Starting client");
-} else if (SERVER_TYPE === ServerType.CLIENT) {
-  dev("Starting client number 2");
-  await env("SOCKET_SERVER_TYPE", "");
-}
+const SERVER_IP = await env(
+  "SERVER_IP",
+  "this is the ip of the other computer you want to connect to"
+);
 
 /*// todo, scan network for port range of 3000-30010 for other running servers, 
   then we can filter that list to only ones that are kit scripts.
@@ -61,18 +43,19 @@ clipboardListener.on("change", async () => {
   let text = await paste();
 
   // emmiting should send the latest clipboard to the client
-  await io.emit("TO_WINDOWS", latest || text);
+  await io.emit("TO_SERVER_EVENT", latest || text);
 });
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("a user connected");
+  await dev("a user connected");
+  await dev(socket);
 });
 
 // starting listening client. This connects to computer two.
-const socketClient = await ioClient(`http://${PC_ADDRESS}:${SERVER_PORT}`, {});
-await socketClient.on("MAC_EVENT", async (clipboardRes) => {
-  // await dev(clipboardRes.text || clipboardRes.value);
-
+const socketClient = await ioClient(`http://${SERVER_IP}:${SERVER_PORT}`, {});
+await socketClient.on("TO_SERVER_EVENT", async (clipboardRes) => {
+  await dev(clipboardRes.text || clipboardRes.value);
   // await setClipboard(clipboardRes.value);
   await kit.log("recieved clipboard from server", clipboardRes.value);
 });
