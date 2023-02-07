@@ -1,4 +1,6 @@
-// .kenv/kenvs/windows-scripts/scripts/to-lower-case.ts
+// Users/plutotom/.kenv/kenvs/plutotom/scripts/to-lower-case.ts
 import "@johnlindquist/kit";
 var text = await getSelectedText();
-setSelectedText(text.toLocaleLowerCase());
+await hide();
+await setSelectedText(text.toLocaleLowerCase());
+await exit();
