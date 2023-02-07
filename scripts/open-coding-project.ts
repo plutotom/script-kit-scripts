@@ -4,32 +4,42 @@
 import "@johnlindquist/kit";
 
 // list all folders in ~/Documents/coding
-// let folders = await ls("~/Documents/coding");
-let folders = await readdir(home("Documents/coding"));
-//sort folders alphabetically
-folders.sort();
+// let codingFolder = await ls("~/Documents/coding");
+let basePath = await env("CODING_FOLDER_LOCATION", async () => {
+  // let basePath = await arg("Coding Folder Location?", async () => {
+  //   let basePath = await ls("~/Documents/coding");
+  //   return basePath;
+  // });
+  return selectFolder("Coding Folder Location?");
+  // return readdir(basePath);
+});
+
+let codingFolder = await readdir(basePath);
+//sort codingFolder alphabetically
+codingFolder.sort();
 // adds "Make New Folder" to the top of the list
-folders.unshift("Make New Folder");
+codingFolder.unshift("Make New Folder");
 
 let selectedFolder = await arg(
   "Pick a project",
-  folders.map((folder) => ({
+  codingFolder.map((folder) => ({
     name: folder,
-    description: home("coding", folder),
-    value: home("Documents/coding", folder),
+    description: home(basePath, folder),
+    value: home(basePath, folder),
   }))
 );
-
 if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
 
   // Give new prompt asking for folder name, on return create new folder, cd into it, and open termnal at it
-  await $`mkdir ~/Documents/coding/${folderName}`;
-  // await $`open -a Terminal ~/Documents/coding/${folderName}`;
-  await $`code ~/Documents/coding/${folderName}`;
+  await $`mkdir ${basePath}${folderName}`;
+  // await $`open -a Terminal ${basePath}${folderName}`;
+  // await $`code ${basePath}${folderName}`;
+  await edit(`${basePath}/${folderName}`);
 } else {
-  await $`code ${selectedFolder}`;
-  // await edit(selectedFolder);
+  // await $`code ${selectedFolder}`;
+
+  await edit(selectedFolder);
 }
 
 // await $`open -a Terminal ${selectedFolder}`;

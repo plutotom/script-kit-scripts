@@ -1,4 +1,4 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/socket-auto-connect.ts
+// .kenv/kenvs/windows-scripts/scripts/socket-auto-connect.ts
 import "@johnlindquist/kit";
 var IP = await npm("ip");
 var xml2js = await npm("xml2js");

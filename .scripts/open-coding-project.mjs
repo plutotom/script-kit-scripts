@@ -1,20 +1,23 @@
-// .kenv/kenvs/windows-scripts/scripts/open-coding-project.ts
+// ../../../../.kenv/kenvs/windows-scripts/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
-var folders = await readdir(home("Documents/coding"));
-folders.sort();
-folders.unshift("Make New Folder");
+var basePath = await env("CODING_FOLDER_LOCATION", async () => {
+  return selectFolder("Coding Folder Location?");
+});
+var codingFolder = await readdir(basePath);
+codingFolder.sort();
+codingFolder.unshift("Make New Folder");
 var selectedFolder = await arg(
   "Pick a project",
-  folders.map((folder) => ({
+  codingFolder.map((folder) => ({
     name: folder,
-    description: home("coding", folder),
-    value: home("Documents/coding", folder)
+    description: home(basePath, folder),
+    value: home(basePath, folder)
   }))
 );
 if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
-  await $`mkdir ~/Documents/coding/${folderName}`;
-  await $`code ~/Documents/coding/${folderName}`;
+  await $`mkdir ${basePath}${folderName}`;
+  await edit(`${basePath}/${folderName}`);
 } else {
-  await $`code ${selectedFolder}`;
+  await edit(selectedFolder);
 }
