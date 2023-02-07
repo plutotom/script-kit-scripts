@@ -26,7 +26,16 @@ const potentialRunningServersDb = await db("potentialRunningServers", {
   data: potentialRunningServers,
 });
 
-const scanForOpenServers = async () => {
+interface potentialRunningServers {
+  addrtype: string;
+  vendor: string;
+  ip: string;
+  port: string;
+}
+
+// how do i type a arrow function?
+
+const scanForOpenServers = async (): Promise<potentialRunningServers[]> => {
   let res = await $`nmap -p  3000-3010 -sV -oX - 10.0.0.200/24 --open`;
 
   // get teh stdout of the process
