@@ -1,12 +1,15 @@
 // Name: socket auto connect
 
 import "@johnlindquist/kit";
+let detectPort = await npm("detect-port");
+const express: typeof import("express") = await npm("express");
 
 const IP = await npm("ip");
 const xml2js = await npm("xml2js");
 const parser = await new xml2js.Parser();
 const localhostIp = await IP.address();
 
+let SERVER_PORT = null;
 let potentialRunningServers = [
   {
     addrtype: "im an example",
@@ -21,6 +24,74 @@ let potentialRunningServers = [
     port: "3002",
   },
 ];
+
+let formatProcesses = async () => {
+  let processes = await getProcesses();
+  return processes
+    .filter((p) => p?.scriptPath)
+    .filter((p) => !p?.scriptPath?.endsWith("processes.js"))
+    .map((p) => {
+      return {
+        name: p?.scriptPath,
+        description: `${p.pid}`,
+        value: p,
+      };
+    });
+};
+
+let isServerRunning = await arg(
+  {
+    placeholder: "Do you have a clipboard server already running?",
+    // make a prview reuging html of the process
+    preview: async () => {
+      let processes = await formatProcesses();
+      return await processes.map((p) => {
+        // reutnr a list that has a line brake between each process and place the pid under the name. Use tailwind to style it.
+        return `<div>
+        <li class="text-gray-400">${p.name} <span class="text-yellow-600">${p.description}</span></li></div>`;
+      });
+    },
+  },
+  async () => {
+    return [
+      { text: "Yes", value: true },
+      { text: "No", value: false },
+    ].map((choice) => {
+      return {
+        name: choice.text,
+        value: choice.value,
+      };
+    });
+  }
+);
+
+/* we have to check if a server is running so that we are discoverable to another
+ instance running on a different computer 
+ */
+if (!isServerRunning) {
+  /* setting server port
+  This port needs to not change other wise it would lose connection to the other pc.
+  */
+  SERVER_PORT = await env("CLIPBOARD_SERVER_PORT", async () => {
+    let posablePort = await arg("Is this port ok?", async () => {
+      let posableOptions = [
+        await detectPort(3000),
+        await detectPort(3000 + 1),
+        await detectPort(3000 + 2),
+      ];
+      return posableOptions.map((port) => port.toString());
+    });
+    return posablePort;
+  });
+
+  // starting server so that this is discoverable to other computers
+  let server = express();
+  server.listen(SERVER_PORT, () => {
+    console.log(`Starting server on port ${SERVER_PORT}`);
+  });
+}
+// ############################################################################################################
+
 // First arg is the name of the database, second arg is the default value
 const potentialRunningServersDb = await db("potentialRunningServers", {
   data: potentialRunningServers,
@@ -33,12 +104,10 @@ interface potentialRunningServers {
   port: string;
 }
 
-// how do i type a arrow function?
-
 const scanForOpenServers = async (): Promise<potentialRunningServers[]> => {
   let res = await $`nmap -p  3000-3010 -sV -oX - 10.0.0.200/24 --open`;
 
-  // get teh stdout of the process
+  // get the stdout of the process
   let ProcessOutput = await res.stdout;
 
   await console.log("here is a log thign");
@@ -69,10 +138,9 @@ const scanForOpenServers = async (): Promise<potentialRunningServers[]> => {
   return potentialRunningServers;
 };
 
-let tempHold = await potentialRunningServersDb.data;
-
 while (true) {
   await arg({
+    placeholder: "Select a server to connect to",
     choices: await potentialRunningServersDb.data?.data?.map((server) => {
       return `${server.addrtype} ${server.vendor} ${server.ip} ${server.port}`;
     }),
