@@ -1,4 +1,4 @@
-// ../../../../.kenv/kenvs/windows-scripts/scripts/open-coding-project.ts
+// .kenv/kenvs/windows-scripts/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
   return selectFolder("Coding Folder Location?");
