@@ -32,12 +32,12 @@ let notion_page_res = await (async () => {
   return response;
 })();
 
-await applescript(String.raw`
-    tell application "Notion"
-        activate
-        open location "${notion_page_res.url}"
-    end tell
-`);
+// await applescript(String.raw`
+//     tell application "Notion"
+//         activate
+//         open location "${notion_page_res.url}"
+//     end tell
+// `);
 
 // opens in browser
-// await open(notion_page_res.url);
+await open(notion_page_res.url);

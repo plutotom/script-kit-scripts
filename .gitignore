@@ -103,3 +103,10 @@ dist
 # TernJS port file
 .tern-port
 .history
+
+
+# this are the mjs files, I belive they are they convered from ts to js for node to run. 
+# if thye do not generate from the scriptes folder (the ones you edit and work on) then restart kit
+# and they should be generated.
+.scripts/
+.scripts

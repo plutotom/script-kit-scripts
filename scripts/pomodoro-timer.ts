@@ -13,3 +13,5 @@ await setTimeout(async () => {
   await notify("Time to take a break!");
   await widget("Time to Brake, you worked for " + workTime + " minuets");
 }, workTime * 60 * 1000);
+
+await hide();
