@@ -16,4 +16,7 @@ if ((await parseFloat(stdout)) > 0) {
   // if the mouse accelaration is 0, set it to 1
   await $`defaults write -g com.apple.mouse.scaling ${baseMouseAcceleration}`;
 }
-await dev(stdout);
+
+await dev(
+  await $`defaults read -g com.apple.mouse.scaling`.then((x) => x.stdout)
+);
