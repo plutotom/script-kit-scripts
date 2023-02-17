@@ -22,7 +22,7 @@ let notion_page_res = await (async () => {
         title: [
           {
             text: {
-              content: "From Script kit: placeholder",
+              content: `New Note: ${String(new Date().toLocaleString())}`,
             },
           },
         ],

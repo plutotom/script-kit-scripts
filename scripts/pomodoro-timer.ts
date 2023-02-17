@@ -4,7 +4,6 @@ import "@johnlindquist/kit";
 
 const notifier: typeof import("node-notifier") = await npm("node-notifier");
 
-await notifier.notify("Message");
 
 // ask user for how much time they want to work
 let workTime: Number = await parseInt(await arg("How many minuets?"));
