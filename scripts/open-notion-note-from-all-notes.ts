@@ -41,12 +41,12 @@ let notionPageUrl = await arg(
 
 // await dev(notionPageUrl);
 
-await applescript(String.raw`
-    tell application "Notion"
-        activate
-        open location "${notionPageUrl}"
-    end tell
-`);
+// await applescript(String.raw`
+//     tell application "Notion"
+//         activate
+//         open location "${notionPageUrl}"
+//     end tell
+// `);
 
 // opens in browser
-// await open(notion_page_res.url);
+await open(notionPageUrl);
