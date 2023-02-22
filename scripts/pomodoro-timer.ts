@@ -2,8 +2,11 @@
 
 import "@johnlindquist/kit";
 
-const notifier: typeof import("node-notifier") = await npm("node-notifier");
+// const notifier: typeof import("node-notifier") = await npm("node-notifier");
+// todo - add a widget to show the timer
+// todo - add time in notification
 
+// const nc = new notifier.NotificationCenter();
 
 // ask user for how much time they want to work
 let workTime: Number = await parseInt(await arg("How many minuets?"));
