@@ -8,23 +8,16 @@ const text = await clipboard.readText();
 const wordCount = await text.split(" ").length;
 
 let w = await widget(`<h1 style="color: black;">${wordCount.toString()}</h1>`, {
-  //   x: 0,
-  //   y: 0,
   width: 300,
   height: 75,
-
-  //   onClick: async () => {
-  //     //close the window
-  //     await close();
-  //   },
 });
 
+// If the widget is clicked, close it
 await w.onClick(async () => {
   await w.close();
 });
 
+// After 3 seconds, close the widget
 setTimeout(async () => {
   await w.close();
 }, 3000);
-
-await notify(wordCount.toString());
