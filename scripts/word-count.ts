@@ -7,7 +7,7 @@ const text = await clipboard.readText();
 // count number of words in clipboard content
 const wordCount = await text.split(" ").length;
 
-let w = await widget(wordCount.toString(), {
+let w = await widget(`<h1 style="color: black;">${wordCount.toString()}</h1>`, {
   //   x: 0,
   //   y: 0,
   width: 300,
