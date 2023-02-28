@@ -5,12 +5,22 @@ import "@johnlindquist/kit";
 // get clipboard content
 const text = await clipboard.readText();
 // count number of words in clipboard content
-const wordCount = await text.split(" ").length;
+const wordCount: number = await text.split(" ").length;
 
-let w = await widget(`<h1 style="color: black;">${wordCount.toString()}</h1>`, {
-  width: 300,
-  height: 75,
-});
+// Three-hundred words = one dubbed-spaced page
+let pageCount: number = wordCount / 300;
+//round to the nearest two decimal places
+pageCount = parseFloat(pageCount.toFixed(2));
+
+let w = await widget(
+  `<h1 style="color: black;">Word Count: ${wordCount.toString()}</h1> 
+  <br> 
+  <h3 style="color: black;">Page Count: ${pageCount}</h3>`,
+  {
+    width: 300,
+    height: 75,
+  }
+);
 
 // If the widget is clicked, close it
 await w.onClick(async () => {
