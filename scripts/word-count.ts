@@ -31,3 +31,5 @@ await w.onClick(async () => {
 setTimeout(async () => {
   await w.close();
 }, 3000);
+
+await exit();
