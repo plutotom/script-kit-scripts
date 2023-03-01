@@ -25,11 +25,11 @@ let w = await widget(
 // If the widget is clicked, close it
 await w.onClick(async () => {
   await w.close();
+  await exit();
 });
 
 // After 3 seconds, close the widget
 setTimeout(async () => {
   await w.close();
+  await exit();
 }, 3000);
-
-await exit();
