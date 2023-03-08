@@ -1,4 +1,4 @@
-// .kenv/kenvs/plutotom/scripts/open-coding-project.ts
+// Users/proctoi/.kenv/kenvs/plutotom-mac/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
   return selectFolder("Coding Folder Location?");
@@ -16,8 +16,8 @@ var selectedFolder = await arg(
 );
 if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
-  await $`mkdir ${basePath}${folderName}`;
-  await edit(`${basePath}/${folderName}`);
+  await $`mkdir ${basePath}/${folderName}`;
+  await $`code ${basePath}/${folderName}`;
 } else {
   await edit(selectedFolder);
 }

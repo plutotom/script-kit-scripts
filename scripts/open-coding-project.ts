@@ -30,15 +30,13 @@ let selectedFolder = await arg(
 );
 if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
-
   // Give new prompt asking for folder name, on return create new folder, cd into it, and open termnal at it
-  await $`mkdir ${basePath}${folderName}`;
+  await $`mkdir ${basePath}/${folderName}`;
   // await $`open -a Terminal ${basePath}${folderName}`;
-  // await $`code ${basePath}${folderName}`;
-  await edit(`${basePath}/${folderName}`);
+  await $`code ${basePath}/${folderName}`;
+  // await edit(`${basePath}/${folderName}`);
 } else {
   // await $`code ${selectedFolder}`;
-
   await edit(selectedFolder);
 }
 
