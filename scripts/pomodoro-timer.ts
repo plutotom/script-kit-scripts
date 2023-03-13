@@ -9,11 +9,31 @@ import "@johnlindquist/kit";
 // const nc = new notifier.NotificationCenter();
 
 // ask user for how much time they want to work
-let workTime: Number = await parseInt(await arg("How many minuets?"));
+let workTime: number = await parseInt(await arg("How many minuets?"));
 
 await setTimeout(async () => {
-  await notify("Time to take a break!");
-  await widget("Time to Brake, you worked for " + workTime + " minuets");
+  var w = await widget(
+    `<h1 style="color: black;">You worked for: ${workTime.toString()}</h1>
+    <br/> 
+    <p>Time to take a break!</p>
+    `,
+    {
+      width: 300,
+      height: 75,
+    }
+  );
+
+  // If the widget is clicked, close it
+  await w.onClick(async () => {
+    await w.close();
+    await exit();
+  });
+
+  // After 3 seconds, close the widget
+  setTimeout(async () => {
+    await w.close();
+    await exit();
+  }, 3000);
 }, workTime * 60 * 1000);
 
 await hide();
