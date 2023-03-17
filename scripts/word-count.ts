@@ -13,9 +13,11 @@ let pageCount: number = wordCount / 300;
 pageCount = parseFloat(pageCount.toFixed(2));
 
 let w = await widget(
-  `<h1 style="color: black;">Word Count: ${wordCount.toString()}</h1> 
-  <br> 
-  <h3 style="color: black;">Page Count: ${pageCount}</h3>`,
+  `
+    <div>
+  <h1 style="color: black;">Word Count: ${wordCount}</h1> 
+  <h3 style="color: black;">Page Count: ${pageCount}</h3>
+  </div>`,
   {
     width: 300,
     height: 75,
