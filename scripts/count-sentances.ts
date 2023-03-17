@@ -1,11 +1,15 @@
 // Name: count sentences
 // shortcut: cmd + shift + p
+// todo - make it not count the period that maybe in-text citations
+// i.e (Smith, 2020, p. 1). - should only count the period after the citation.
 import "@johnlindquist/kit";
 
 const myText: string = await clipboard.readText();
 const stop: RegExp = /[.!?]/;
+
 const sentence: Array<string> = myText.split(stop);
 const sentenceLength: number = sentence.length - 1;
+
 let w = await widget(
   `
       <div>
