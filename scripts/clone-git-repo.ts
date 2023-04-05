@@ -1,5 +1,5 @@
 // Name: Clone A Repository
-// Author: Orhan Erday
+// Author: Most coded from Orhan Erday then i added onto it
 // Twitter: @orhan_erday
 
 import "@johnlindquist/kit";
@@ -103,8 +103,18 @@ function getTabHandler(getter: () => Promise<OptionType<RawRepositoryType>[]>) {
   };
 }
 
+async function cloneByUrl(input = "") {
+  let repo = await arg("Enter a repository, i.e: orhanerday/open-ai");
+  let name = repo.split("/")[1];
+  cloneAndOpenRepo(repo, name);
+  // Call toggle to keep the prompt open and create another todo
+  // await fetchNoRepos();
+}
+
 const recentTab = getTabHandler(fetchRecentRepos);
 onTab("Recent", recentTab);
 onTab("Owner", getTabHandler(fetchOwnerRepos));
 onTab("All", getTabHandler(fetchAllRepos));
+onTab("clone by url", cloneByUrl);
+
 await recentTab();

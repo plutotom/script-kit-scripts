@@ -1,6 +1,5 @@
 // Name: Todoist to Mem
 // Description: Takes a mem page url then sends it to notion
-// Shortcut: cmd + shift + m
 
 import "@johnlindquist/kit";
 

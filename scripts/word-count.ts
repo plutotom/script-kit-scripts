@@ -21,6 +21,7 @@ let w = await widget(
   {
     width: 300,
     height: 75,
+    alwaysOnTop: true,
   }
 );
 
