@@ -20,14 +20,6 @@ var w = await widget(
     height: 75,
   }
 );
-// If the widget is clicked, close it
-await w.onClick(async () => {
-  // await w.close();
-});
-// After 3 seconds, close the widget
-setTimeout(async () => {
-  // await w.close();
-}, 3000);
 
 let projectLocation = await env("PROJECT_LOCATION", async () => {
   return selectFolder("Coding Folder Location?");
