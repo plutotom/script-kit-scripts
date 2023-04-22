@@ -3,10 +3,35 @@
 // Twitter: @orhan_erday
 
 import "@johnlindquist/kit";
-const projectLocation = await env(
-  "PROJECT_LOCATION",
-  "Enter your project location"
+// const projectLocation = await env(
+//   "PROJECT_LOCATION",
+//   "Enter project location (defaults to home dir), i.e. /Documents/Coding"
+// );
+
+var w = await widget(
+  `<div style="margin:10px;">
+  
+      <h1 style="color: black;">Set your project location </h1>
+      <p style="color: black;">i.e. /Documents/Coding</p>
+    </div>
+    `,
+  {
+    width: 300,
+    height: 75,
+  }
 );
+// If the widget is clicked, close it
+await w.onClick(async () => {
+  // await w.close();
+});
+// After 3 seconds, close the widget
+setTimeout(async () => {
+  // await w.close();
+}, 3000);
+
+let projectLocation = await env("PROJECT_LOCATION", async () => {
+  return selectFolder("Coding Folder Location?");
+});
 
 const { Octokit } = await npm("octokit");
 
