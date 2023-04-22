@@ -1,4 +1,6 @@
-// Name: socket-clipboard
+// Name: socket-clipboard (this is the only one that works rn)
+// This seems to only copy one direction. I think that is because you have to set up some wonky stuff in order for the clipboard watcher to work.
+// I belive if you look clipboard-event you will find out how to set it up on windows.
 
 import "@johnlindquist/kit";
 import * as http from "http";
@@ -54,7 +56,6 @@ io.on("connection", async (socket) => {
 // starting listening client. This connects to computer two.
 const socketClient = await ioClient(`http://${SERVER_IP}:${SERVER_PORT}`, {});
 await socketClient.on("TO_SERVER_EVENT", async (clipboardRes) => {
-  // await dev(clipboardRes);
   await clipboard.writeText(clipboardRes);
   await kit.log("recieved clipboard from server", clipboardRes.value);
 });
@@ -67,5 +68,5 @@ server.listen(MY_PORT, () => {
   console.log(`listening on *:${MY_PORT}`);
 });
 
-// hides script kit/
+// hides script kit Panal/
 await hide();
