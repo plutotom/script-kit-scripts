@@ -5,4 +5,8 @@ import "@johnlindquist/kit";
 
 const dakBoardUrl =
   "https://dakboard.com/app/screenPredefined?p=a1041ea239983d1d030246ec67ecfdce";
+
 await browse(dakBoardUrl);
+
+await wait(1000); // 10 seconds cuz laptop is slow
+await keyboard.pressKey(Key.F11); // full screen
