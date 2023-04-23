@@ -8,5 +8,5 @@ const dakBoardUrl =
 
 await browse(dakBoardUrl);
 
-await wait(1000); // 10 seconds cuz laptop is slow
+await wait(10000); // 10 seconds cuz laptop is slow
 await keyboard.pressKey(Key.F11); // full screen
