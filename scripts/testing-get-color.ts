@@ -1,4 +1,4 @@
-// Name: Eye Dropper - Get Color
+// Name: Color Picker - Get Color
 
 import "@johnlindquist/kit";
 
