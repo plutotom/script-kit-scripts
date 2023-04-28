@@ -19,11 +19,12 @@ if (!is_dir) {
 }
 // await $`cd ${basePath}/dash-spectacle-dashboard`;
 
-await term(`cd ${basePath}/dash-spectacle-dashboard`);
+await exec(`cd ${basePath}/dash-spectacle-dashboard`);
 
-await term(`git pull`);
-await term(`npm i`);
-await term(`npm run xps-start`);
+await term({
+  cwd: `${basePath}/dash-spectacle-dashboard`,
+  command: `git pull && npm i && npm run xps-start`,
+});
 
 await wait(10000);
 await keyboard.pressKey(Key.F11);
