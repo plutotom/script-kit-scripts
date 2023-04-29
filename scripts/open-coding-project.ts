@@ -1,6 +1,6 @@
 // Name: Open Coding Project
 // Description: Open a coding project in a new terminal based on the folder name
-
+// alias: project
 import "@johnlindquist/kit";
 
 // list all folders in ~/Documents/coding
