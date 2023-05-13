@@ -1,5 +1,5 @@
 // Name: Color Picker - Get Color
-
+// alias: pick
 import "@johnlindquist/kit";
 
 await hide();
