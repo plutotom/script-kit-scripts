@@ -1,5 +1,4 @@
 // Name: start clipboard server
-// Schedule: */1 * * * *
 // Description: Starts a express server that has open port for windows pc to make get request to get clipboard contents
 
 import "@johnlindquist/kit";
