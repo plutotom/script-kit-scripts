@@ -1,5 +1,4 @@
 // Name: test-cron-job
-// Schedule: */15 * * * *
 
 import "@johnlindquist/kit";
 
