@@ -1,5 +1,5 @@
 // Name: notify to close windows
-// Schedule: */10 * * * *
+// Schedule: */15 * * * *
 
 import "@johnlindquist/kit";
 
@@ -21,14 +21,22 @@ await weatherInstance
   .getTemperature()
   .then((temp) => {
     if (temp > 76) {
-      notify(`It is ${temp} degrees outside. You should close your windows!`);
-    } else if (temp < 76 && temp > 63) {
-      notify(`It is ${temp} degrees outside. You should open your windows!`);
+      notify(`${temp}°. Close your windows! 🪟⬇️🙅`);
+      menu(` CLOSE`, []);
+    } else if (temp < 76 && temp > 62) {
+      menu(`OPEN`, []);
+      notify(
+        `It is ${temp} degrees outside. 🪟⬆️ You should open your windows!`
+      );
+    } else {
+      notify(`${temp}°. Close your windows!`);
+      menu(` CLOSE`, []);
     }
   })
   .catch((error) => {
     dev(error.message);
     notify(error.message);
   });
+
 await hide();
 await exit();
