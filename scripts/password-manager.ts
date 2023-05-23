@@ -1,6 +1,6 @@
 // Menu: Password Manager
 // Description: Manager all your passwords justing using few keys
-// Shortcut:
+// Shortcut: Command + Shift + J
 // Author: @rockingrohit9639
 
 import "@johnlindquist/kit";
@@ -15,19 +15,19 @@ const { passwords, write } = await db("passwords", { passwords: [] });
 type Option = {
   name: string;
   description: string;
-  value: "ADD_NEW_PASSWORD" | "COPY_PASSWORD";
+  value: "COPY_PASSWORD" | "ADD_NEW_PASSWORD";
 };
 
 const PM_OPTIONS: Option[] = [
   {
-    name: "Add New Password",
-    description: "Add a new password to the database",
-    value: "ADD_NEW_PASSWORD",
-  },
-  {
     name: "Copy Password",
     description: "Copy one of the saved passwords",
     value: "COPY_PASSWORD",
+  },
+  {
+    name: "Add New Password",
+    description: "Add a new password to the database",
+    value: "ADD_NEW_PASSWORD",
   },
 ];
 
