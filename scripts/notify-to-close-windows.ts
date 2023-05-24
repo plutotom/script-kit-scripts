@@ -20,7 +20,8 @@ await weatherInstance.setUnits("imperial");
 await weatherInstance
   .getTemperature()
   .then((temp) => {
-    if (temp > 76) {
+    if (temp > 84 || temp < 50) return;
+    else if (temp > 76) {
       notify(`${temp}°. Close your windows! 🪟⬇️🙅`);
       menu(` CLOSE`, []);
     } else if (temp < 76 && temp > 62) {
@@ -37,6 +38,3 @@ await weatherInstance
     dev(error.message);
     notify(error.message);
   });
-
-await hide();
-await exit();
