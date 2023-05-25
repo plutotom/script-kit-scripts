@@ -2,6 +2,7 @@
 // Description: Manager all your passwords justing using few keys
 // Shortcut: Command + Shift + J
 // Author: @rockingrohit9639
+// alias: pass
 
 import "@johnlindquist/kit";
 const { nanoid } = await npm("nanoid");

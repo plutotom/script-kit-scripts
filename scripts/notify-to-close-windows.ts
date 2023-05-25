@@ -21,7 +21,7 @@ await weatherInstance
   .getTemperature()
   .then((temp) => {
     if (temp > 84 || temp < 50) return;
-    else if (temp > 76) {
+    else if (temp > 74) {
       notify(`${temp}°. Close your windows! 🪟⬇️🙅`);
       menu(` CLOSE`, []);
     } else if (temp < 76 && temp > 62) {
