@@ -20,18 +20,19 @@ await weatherInstance.setUnits("imperial");
 await weatherInstance
   .getTemperature()
   .then((temp) => {
-    if (temp > 84 || temp < 50) return;
+    if (temp > 84 || temp < 50)
+      return; // Don't send notify if its obvious hot or cold
     else if (temp > 74) {
-      notify(`${temp}°. Close your windows! 🪟⬇️🙅`);
+      notify(`${temp}°. 🥵 Close your windows! 🪟⬇️🙅`);
       menu(` CLOSE`, []);
-    } else if (temp < 76 && temp > 62) {
+    } else if (temp < 58) {
+      notify(`${temp}°. 🥶 COLD! Close your windows!`);
+      menu(`CLOSE`, []);
+    } else if (temp < 76 && temp > 58) {
       menu(`OPEN`, []);
       notify(
         `It is ${temp} degrees outside. 🪟⬆️ You should open your windows!`
       );
-    } else {
-      notify(`${temp}°. Close your windows!`);
-      menu(` CLOSE`, []);
     }
   })
   .catch((error) => {
