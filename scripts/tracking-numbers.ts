@@ -10,7 +10,10 @@ const { trackingNumbers, write } = await db("trackingNumbers", {
 type Option = {
   name: string;
   description: string;
-  value: "COPY_TRACKING_NUMBER" | "ADD_NEW_TRACKING_NUMBER";
+  value:
+    | "COPY_TRACKING_NUMBER"
+    | "ADD_NEW_TRACKING_NUMBER"
+    | "DELETE_TRACKING_NUMBER";
 };
 
 const PM_OPTIONS: Option[] = [
@@ -20,9 +23,14 @@ const PM_OPTIONS: Option[] = [
     value: "COPY_TRACKING_NUMBER",
   },
   {
-    name: "Add New Password",
-    description: "Add a new password to the database",
+    name: "Add New Tracking Number",
+    description: "Add a new Tracking Number to the database",
     value: "ADD_NEW_TRACKING_NUMBER",
+  },
+  {
+    name: "delete a tracking number",
+    description: "delete a tracking number from the database",
+    value: "DELETE_TRACKING_NUMBER",
   },
 ];
 
@@ -38,6 +46,32 @@ if (choice === "ADD_NEW_TRACKING_NUMBER") {
 
 if (choice === "COPY_TRACKING_NUMBER") {
   listAndCopyTrackingNumber();
+}
+
+if (choice === "DELETE_TRACKING_NUMBER") {
+  deleteTrackingNumber();
+}
+
+async function deleteTrackingNumber() {
+  const trackingNumber = await arg(
+    "Which tracking number would you like to delete ?",
+    () =>
+      trackingNumbers.map(({ title, trackingNumber }) => ({
+        name: title,
+        value: trackingNumber,
+      }))
+  );
+
+  const newTrackingNumbers = trackingNumbers.filter(
+    (t) => t.trackingNumber !== trackingNumber
+  );
+
+  trackingNumbers.length = 0;
+  trackingNumbers.push(...newTrackingNumbers);
+
+  /** Saving the password in db */
+  await write();
+  notify(`Tracking Number deleted successfully!`);
 }
 
 async function addNewTrackingNumber() {
