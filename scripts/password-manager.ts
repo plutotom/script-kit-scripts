@@ -76,9 +76,13 @@ async function listAndCopyPassword() {
   );
 
   /** Decrypting the password */
-  const decryptedPassword = cryptr.decrypt(passwordToCopy);
-
-  /** Copying the password to clipboard */
-  copy(decryptedPassword);
-  notify("Password copied to you clipboard!");
+  try {
+    const decryptedPassword = cryptr.decrypt(passwordToCopy);
+    /** Copying the password to clipboard */
+    copy(decryptedPassword);
+    notify("Password copied to you clipboard!");
+  } catch (e) {
+    await notify("Wrong password");
+    await dev(e);
+  }
 }
