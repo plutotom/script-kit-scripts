@@ -1,5 +1,5 @@
-// Name: pull projects
-// alias: pull
+// Name: Sync projects
+// alias: Sync
 import "@johnlindquist/kit";
 
 // list all folders in ~/Documents/coding
@@ -13,16 +13,18 @@ codingFolder = codingFolder.filter((element) => {
   return element[0] !== ".";
 });
 
-await codingFolder.forEach(async (el, inx, arr) => {
+const pullProject = async (basePath, path) => {
   try {
-    cd(basePath + "/" + el);
-    await exec(`${basePath} + "/" + ${el}\n git stash`);
-    await exec(`git pull`);
-    await wait(500);
-    // await getScripts(false);
-    await mainScript();
+    log(`Path to project that will be pulled: ${basePath}\\${path}`);
   } catch (error) {
-    await console.log(`Failed to pull ${basePath}"/"${el} \n ${error}`);
-    await wait(1000);
+    log(error);
+    // await log(`Failed to pull ${basePath}\\${path} \n ${error}`);
   }
+};
+
+await codingFolder.forEach(async (el, inx, arr) => {
+  await pullProject(basePath, el);
 });
+
+// await wait(5000);
+// await exit();
