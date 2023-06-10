@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "addrtype": "im an example",
+      "vendor": "idk",
+      "ip": "10.0.0.222",
+      "port": "3002"
+    },
+    {
+      "addrtype": "im an example2",
+      "vendor": "idkels",
+      "ip": "2332",
+      "port": "3002"
+    }
+  ]
+}
