@@ -1,3 +1,7 @@
+// Name: get weather
+
+import "@johnlindquist/kit";
+
 // Name: notify to close windows
 // Schedule: */15 * * * *
 
@@ -19,25 +23,15 @@ await weatherInstance.setUnits("imperial");
 
 await weatherInstance
   .getTemperature()
-  .then((temp) => {
-    if (temp > 84 || temp < 50)
-      return; // Don't send notify if its obvious hot or cold
-    else if (temp > 74) {
-      notify(`${temp}°. 🥵 Close your windows! 🪟⬇️🙅`);
-      menu(` CLOSE`, []);
-    } else if (temp < 58) {
-      notify(`${temp}°. 🥶 COLD! Close your windows!`);
-      menu(`CLOSE`, []);
-    } else if (temp < 76 && temp > 58) {
-      menu(`OPEN`, []);
-      notify(
-        `It is ${temp} degrees outside. 🪟⬆️ You should open your windows!`
-      );
-    }
+  .then(async (temp) => {
+    // notify(`${temp}°`);
+    notify({ title: "Weather", message: temp, wait: false });
   })
   .catch((error) => {
-    // dev(error.message);
-    notify("There was an error: " + error.message, (error) => {
-      dev(error);
-    });
+    notify(
+      { title: "Error", message: error.message, wait: true },
+      async (error) => {
+        await dev(error);
+      }
+    );
   });
