@@ -12,7 +12,7 @@ const repos = [
   "testing-react-apps",
 ];
 
-const script = `git add -A && git stash && git checkout main && git pull && ./scripts/update-deps && git commit -am 'update all deps' --no-verify && git push && git status`;
+const script = `git add -A && git stash && git checkout main && git pull && git commit -am 'update from kit' --no-verify && git push && git status`;
 for (const repo of repos) {
   const scriptString = JSON.stringify(
     `cd ~/code/epic-react/${repo} && ${script}`
