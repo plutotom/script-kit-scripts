@@ -1,4 +1,4 @@
-// ../../Users/pluto/.kenv/kenvs/plutotom/scripts/open-coding-project.ts
+// Users/proctoi/.kenv/kenvs/plutotom-mac/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
   return selectFolder("Coding Folder Location?");
