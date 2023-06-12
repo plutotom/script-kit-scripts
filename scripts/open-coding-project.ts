@@ -36,11 +36,7 @@ let selectedFolder = await arg(
         bar: "right",
         onPress: async (input, state) => {
           let fullPath = state.focused.value;
-          try {
-            isWin ? await exec(`explorer ${fullPath}`) : $`open ${fullPath}`;
-          } catch (e) {
-            dev(e);
-          }
+          isWin ? await exec(`explorer ${fullPath}`) : $`open ${fullPath}`;
         },
       },
     ],
