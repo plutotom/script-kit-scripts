@@ -14,40 +14,38 @@ codingFolder.sort();
 // Adds "Make New Folder" to the top of the list
 codingFolder.unshift("Make New Folder");
 
+// let selectedFolder = await arg(
+//   "Pick a project",
+//   codingFolder.map((folder) => ({
+//     name: folder,
+//     description: home(basePath, folder),
+//     value: home(basePath, folder),
+//   }))
+// );
+
 let selectedFolder = await arg(
-  "Pick a project",
+  {
+    placeholder: "Kit Environment Actions",
+    enter: "Select",
+    shortcuts: [
+      {
+        key: `${cmd}+o`,
+        name: "control+o",
+        bar: "right",
+        onPress: async (input, state) => {
+          let fullPath = state.focused.value;
+          await exec(`explorer ${fullPath}`);
+        },
+      },
+    ],
+  },
   codingFolder.map((folder) => ({
     name: folder,
     description: home(basePath, folder),
     value: home(basePath, folder),
   }))
-  // (setShortcuts = [
-  //   {
-  //     name: "Stash",
-  //     key: `${cmd}+s`,
-  //     bar: "right",
-  //     onPress: async () => {
-  //       term.write(`git stash`);
-  //     },
-  //   },
-  //   {
-  //     name: "Merge",
-  //     key: `${cmd}+m`,
-  //     bar: "right",
-  //     onPress: async () => {
-  //       term.write(`git merge`);
-  //     },
-  //   },
-  //   {
-  //     name: "Exit",
-  //     key: `${cmd}+w`,
-  //     bar: "right",
-  //     onPress: async () => {
-  //       submit("");
-  //     },
-  //   },
-  // ])
 );
+
 if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
   // Give new prompt asking for folder name, on return create new folder, cd into it, and open terminal at it
