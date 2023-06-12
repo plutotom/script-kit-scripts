@@ -14,11 +14,15 @@ var selectedFolder = await arg(
     shortcuts: [
       {
         key: `${cmd}+o`,
-        name: "Open in Explorer",
+        name: isWin ? "Open in Explorer" : "Open in Finder",
         bar: "right",
         onPress: async (input, state) => {
           let fullPath = state.focused.value;
-          isWin ? await exec(`explorer ${fullPath}`) : $`open fullPath`;
+          try {
+            isWin ? await exec(`explorer ${fullPath}`) : $`open ${fullPath}`;
+          } catch (e) {
+            dev(e);
+          }
         }
       }
     ]
