@@ -3,6 +3,8 @@
 // alias: pro
 import "@johnlindquist/kit";
 
+let cmd = isWin ? "ctrl" : "cmd";
+
 // list all folders in ~/Documents/coding
 let basePath = await env("CODING_FOLDER_LOCATION", async () => {
   return selectFolder("Coding Folder Location?");
@@ -30,11 +32,11 @@ let selectedFolder = await arg(
     shortcuts: [
       {
         key: `${cmd}+o`,
-        name: "control+o",
+        name: "Open in Explorer",
         bar: "right",
         onPress: async (input, state) => {
           let fullPath = state.focused.value;
-          await exec(`explorer ${fullPath}`);
+          isWin ? await exec(`explorer ${fullPath}`) : $`open fullPath`;
         },
       },
     ],

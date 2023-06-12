@@ -1,5 +1,6 @@
 // Users/plutotom/.kenv/kenvs/plutotom/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
+var cmd = isWin ? "ctrl" : "cmd";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
   return selectFolder("Coding Folder Location?");
 });
@@ -13,11 +14,11 @@ var selectedFolder = await arg(
     shortcuts: [
       {
         key: `${cmd}+o`,
-        name: "control+o",
+        name: "Open in Explorer",
         bar: "right",
         onPress: async (input, state) => {
           let fullPath = state.focused.value;
-          await exec(`explorer ${fullPath}`);
+          isWin ? await exec(`explorer ${fullPath}`) : $`open fullPath`;
         }
       }
     ]
