@@ -2,9 +2,6 @@
 
 import "@johnlindquist/kit";
 
-// Name: notify to close windows
-// Schedule: */15 * * * *
-
 import "@johnlindquist/kit";
 
 import { AsyncWeather } from "@cicciosgamino/openweather-apis";
