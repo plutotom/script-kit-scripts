@@ -1,7 +1,4 @@
 // Name: get weather
-
-import "@johnlindquist/kit";
-
 import "@johnlindquist/kit";
 
 import { AsyncWeather } from "@cicciosgamino/openweather-apis";
