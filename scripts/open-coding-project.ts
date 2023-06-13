@@ -39,6 +39,17 @@ let selectedFolder = await arg(
           isWin ? await exec(`explorer ${fullPath}`) : $`open ${fullPath}`;
         },
       },
+      {
+        key: `${cmd}+p`,
+        name: "Git Pull",
+        bar: "right",
+        onPress: async (input, state) => {
+          let fullPath = state.focused.value;
+          isWin
+            ? await term(`cd ${fullPath} && git pull`)
+            : term(`cd ${fullPath} && git pull`);
+        },
+      },
     ],
   },
   codingFolder.map((folder) => ({

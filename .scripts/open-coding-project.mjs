@@ -1,4 +1,4 @@
-// ../../Users/pluto/.kenv/kenvs/plutotom/scripts/open-coding-project.ts
+// ../../../../.kenv/kenvs/plutotom/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var cmd = isWin ? "ctrl" : "cmd";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
@@ -19,6 +19,15 @@ var selectedFolder = await arg(
         onPress: async (input, state) => {
           let fullPath = state.focused.value;
           isWin ? await exec(`explorer ${fullPath}`) : $`open ${fullPath}`;
+        }
+      },
+      {
+        key: `${cmd}+p`,
+        name: "Git Pull",
+        bar: "right",
+        onPress: async (input, state) => {
+          let fullPath = state.focused.value;
+          isWin ? await term(`cd ${fullPath} && git pull`) : term(`cd ${fullPath} && git pull`);
         }
       }
     ]
