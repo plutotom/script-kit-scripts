@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// ../../../../.kenv/kenvs/plutotom/scripts/open-coding-project.ts
-=======
 // Users/proctoi/.kenv/kenvs/plutotom-mac/scripts/open-coding-project.ts
->>>>>>> 7416bb5bde31b476b7d919f71738e14058dd8049
 import "@johnlindquist/kit";
 var cmd = isWin ? "ctrl" : "cmd";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
