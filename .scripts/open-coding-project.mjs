@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 // ../../../../.kenv/kenvs/plutotom/scripts/open-coding-project.ts
-=======
-// Users/proctoi/.kenv/kenvs/plutotom-mac/scripts/open-coding-project.ts
->>>>>>> 7416bb5bde31b476b7d919f71738e14058dd8049
 import "@johnlindquist/kit";
 var cmd = isWin ? "ctrl" : "cmd";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
@@ -32,6 +28,19 @@ var selectedFolder = await arg(
         onPress: async (input, state) => {
           let fullPath = state.focused.value;
           isWin ? await term(`cd ${fullPath} && git pull`) : term(`cd ${fullPath} && git pull`);
+        }
+      },
+      {
+        key: `${cmd}+u`,
+        name: "Git Push",
+        bar: "right",
+        onPress: async (input, state) => {
+          let fullPath = state.focused.value;
+          isWin ? await term(
+            `cd ${fullPath} && git add . && git commit -m "Pushed from ScriptKit project manager"`
+          ) : term(
+            `cd ${fullPath} && git add . && git commit -m "Pushed from ScriptKit project manager`
+          );
         }
       }
     ]
