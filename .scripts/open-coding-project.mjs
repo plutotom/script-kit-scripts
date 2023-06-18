@@ -1,4 +1,4 @@
-// ../../Users/pluto/.kenv/kenvs/plutotom/scripts/open-coding-project.ts
+// .kenv/kenvs/plutotom/scripts/open-coding-project.ts
 import "@johnlindquist/kit";
 var cmd = isWin ? "ctrl" : "cmd";
 var basePath = await env("CODING_FOLDER_LOCATION", async () => {
