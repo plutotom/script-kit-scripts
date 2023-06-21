@@ -29,6 +29,19 @@ var selectedFolder = await arg(
           let fullPath = state.focused.value;
           isWin ? await term(`cd ${fullPath} && git pull`) : term(`cd ${fullPath} && git pull`);
         }
+      },
+      {
+        key: `${cmd}+u`,
+        name: "Git Push",
+        bar: "right",
+        onPress: async (input, state) => {
+          let fullPath = state.focused.value;
+          isWin ? await term(
+            `cd ${fullPath} && git add . && git commit -m "Pushed from ScriptKit project manager"`
+          ) : term(
+            `cd ${fullPath} && git add . && git commit -m "Pushed from ScriptKit project manager`
+          );
+        }
       }
     ]
   },
