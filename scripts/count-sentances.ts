@@ -1,5 +1,5 @@
 // Name: count sentences
-// shortcut: cmd + shift + p
+// shortcut: cmd + shift + 3
 // todo - make it not count the period that maybe in-text citations
 // i.e (Smith, 2020, p. 1). - should only count the period after the citation.
 import "@johnlindquist/kit";
