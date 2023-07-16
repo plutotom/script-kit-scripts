@@ -1,5 +1,5 @@
 // Name: tracking numbers
-
+// alias: track
 import "@johnlindquist/kit";
 const { nanoid } = await npm("nanoid");
 
