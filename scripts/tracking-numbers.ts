@@ -71,7 +71,7 @@ async function deleteTrackingNumber() {
 
   /** Saving the password in db */
   await write();
-  notify(`Tracking Number deleted successfully!`);
+  // notify(`Tracking Number deleted successfully!`);
 }
 
 async function addNewTrackingNumber() {
@@ -91,7 +91,7 @@ async function addNewTrackingNumber() {
 
   /** Saving the password in db */
   await write();
-  notify(`Tracking Number for ${title} added successfully!`);
+  // notify(`Tracking Number for ${title} added successfully!`);
 }
 
 async function listAndCopyTrackingNumber() {
@@ -121,5 +121,5 @@ async function listAndCopyTrackingNumber() {
   } catch (e) {
     dev(e);
   }
-  notify("tracking number copied to you clipboard!");
+  // notify("tracking number copied to you clipboard!");
 }
