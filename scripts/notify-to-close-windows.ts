@@ -1,5 +1,5 @@
 // Name: notify to close windows
-// SchuleCancel: */15 * * * *
+// SchuleCancel:
 
 import "@johnlindquist/kit";
 
