@@ -1,5 +1,5 @@
 // Name: push plutotom
-
+// alias: push
 import "@johnlindquist/kit";
 
 let examplesDir = kenvPath("kenvs", "plutotom");

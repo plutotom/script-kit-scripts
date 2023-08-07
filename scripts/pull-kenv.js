@@ -1,5 +1,5 @@
-// Name: update plutotom
-
+// Name: pull plutotom
+// alias: pull
 import "@johnlindquist/kit";
 
 let examplesDir = kenvPath("kenvs", "plutotom");
