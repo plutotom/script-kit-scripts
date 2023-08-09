@@ -8,6 +8,5 @@ cd(examplesDir);
 await $`git add .`;
 await $`git commit -m "push plutotom"`;
 await $`git push`;
-// await $`git stash pop`;
 
 await mainScript();
