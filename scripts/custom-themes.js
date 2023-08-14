@@ -20,6 +20,16 @@ let themes = {
     accent: "#268BD2",
     ui: "#c2bea8",
     opacity: isMac ? "0.6" : "1",
+    "ui-bg-opacity": "0.5", // the selector background
+    "ui-border-opacity": ".01", // the selector border
+    // "--color-primary-light": string
+    // "--color-secondary-light": string
+    // "--color-primary": string
+    // "--color-secondary-dark": string
+    // "--color-background-light": string
+    // "--color-background-dark": string
+    // "--opacity-themelight": string
+    // "--opacity-themedark": string
   },
 };
 let guide = await readFile(kitPath("GUIDE.md"), "utf-8");
