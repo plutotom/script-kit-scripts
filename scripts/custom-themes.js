@@ -15,7 +15,8 @@ let themes = {
     appearance: "dark",
   },
   ["Solarized Light"]: {
-    foreground: "#657B83",
+    foreground: "#f21b3f20",
+    // #657B83
     background: "#FDF6E3",
     accent: "#268BD2",
     ui: "#c2bea8",
