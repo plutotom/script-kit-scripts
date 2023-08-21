@@ -15,7 +15,7 @@ let themes = {
     appearance: "dark",
   },
   ["Solarized Light"]: {
-    foreground: "#f21b3f20",
+    foreground: "#f21b3f20", // this is the text color
     // #657B83
     background: "#FDF6E3",
     accent: "#268BD2",
