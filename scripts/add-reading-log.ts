@@ -9,8 +9,7 @@ let notionDatabaseId = await env(
   "Enter your notes database ID"
 );
 
-const notion = new Client({ auth: process.env.NOTION_USER_TOKEN });
-// is there a way to query a database for its properties?
+const notion = new Client({ auth: notionToken });
 let bookLogBookList = await (async () => {
   const response = await notion.databases.retrieve({
     database_id: notionDatabaseId,
@@ -76,10 +75,10 @@ let notion_page_res = await (async () => {
         ],
       },
       "End Page": {
-        number: end_page,
+        number: Number(end_page),
       },
-      "Read pages": {
-        number: read_pages,
+      "Pages Read": {
+        number: Number(read_pages),
       },
       Book: {
         select: {
@@ -90,6 +89,4 @@ let notion_page_res = await (async () => {
   });
   return response;
 })();
-await dev(notion_page_res);
-
 await exit();
