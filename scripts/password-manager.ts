@@ -65,7 +65,7 @@ async function addNewPassword() {
 
   /** Saving the password in db */
   await write();
-  notify(`Password for ${title} added successfully!`);
+  // notify(`Password for ${title} added successfully!`);
 }
 
 async function listAndCopyPassword() {
@@ -80,7 +80,7 @@ async function listAndCopyPassword() {
     const decryptedPassword = cryptr.decrypt(passwordToCopy);
     /** Copying the password to clipboard */
     copy(decryptedPassword);
-    notify("Password copied to you clipboard!");
+    // notify("Password copied to you clipboard!");
   } catch (e) {
     await notify("Wrong password");
     await dev(e);
