@@ -104,20 +104,12 @@ async function listAndCopyTrackingNumber() {
       }))
   );
 
-  /** Copying the password to clipboard */
-  copy(trackingNumber);
+  /** Copying the tracking number to clipboard */
+  // copy(trackingNumber);
   try {
     // await browse("https://www.google.com/search?q=" + trackingNumber);
     await browse("https://parcelsapp.com/en/tracking/" + trackingNumber);
     // get the element with the id="tracking-info" and return it
-
-    // const trackingInfo = await scrapeSelector(
-    //   `https://parcelsapp.com/en/tracking/${trackingNumber}`,
-    //   "#tracking-info",
-    //   (el) => {
-    //     return el.innerText;
-    //   }
-    // );
   } catch (e) {
     dev(e);
   }
