@@ -1,5 +1,5 @@
 // Name: add reading log
-// aliases: log
+// alias: log
 import "@johnlindquist/kit";
 const { Client } = await npm("@notionhq/client");
 
@@ -26,8 +26,29 @@ let selectedBookId = await arg(
 );
 let bookTitle = bookLogBookList.find((book) => book.id === selectedBookId).name;
 
+// get the last 20 items from the database
+let latestEntriesEndPage = await (async () => {
+  const response = await notion.databases.query({
+    database_id: notionDatabaseId,
+    sorts: [
+      {
+        property: "Created time",
+        direction: "descending",
+      },
+    ],
+    filter: {
+      property: "Book",
+      select: {
+        equals: bookTitle,
+      },
+    },
+    page_size: 1,
+  });
+  return response.results[0].properties["End Page"].number;
+})();
+
 // get list of books from notion database
-let [name, end_page, read_pages, book] = await fields([
+let [name, end_page, start_pages, book] = await fields([
   {
     name: "Entry Name",
     label: "entry_name",
@@ -42,12 +63,20 @@ let [name, end_page, read_pages, book] = await fields([
     type: "number",
     placeholder: "40",
   },
+  // {
+  //   required: true,
+  //   name: "Read pages",
+  //   label: "read_pages",
+  //   type: "number",
+  //   placeholder: "40",
+  // },
   {
     required: true,
-    name: "Read pages",
-    label: "read_pages",
+    name: "Start pages",
+    label: "start_pages",
     type: "number",
-    placeholder: "40",
+    placeholder: latestEntriesEndPage,
+    value: latestEntriesEndPage,
   },
   {
     name: "Book",
@@ -77,9 +106,12 @@ let notion_page_res = await (async () => {
       "End Page": {
         number: Number(end_page),
       },
-      "Pages Read": {
-        number: Number(read_pages),
+      "Start Page": {
+        number: Number(start_pages),
       },
+      // "Read Page": {
+      //   number: Number(start_pages),
+      // },
       Book: {
         select: {
           name: book,
