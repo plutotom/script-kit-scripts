@@ -2,6 +2,7 @@
 // Description: Search unsplash for the perfect image to download
 // Author: Vogelino
 // Twitter: @soyvogelino
+//alisa: splash
 
 import "@johnlindquist/kit";
 const { createApi } = await npm("unsplash-js");
