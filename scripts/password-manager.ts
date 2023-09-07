@@ -13,60 +13,62 @@ const cryptr = new Cryptr(CRYPTR_KEY);
 
 const { passwords, write } = await db("passwords", { passwords: [] });
 
-type Option = {
-  name: string;
-  description: string;
-  value: "COPY_PASSWORD" | "ADD_NEW_PASSWORD";
-};
+await listAndCopyPassword();
 
-const PM_OPTIONS: Option[] = [
-  {
-    name: "Copy Password",
-    description: "Copy one of the saved passwords",
-    value: "COPY_PASSWORD",
-  },
-  {
-    name: "Add New Password",
-    description: "Add a new password to the database",
-    value: "ADD_NEW_PASSWORD",
-  },
-];
+// type Option = {
+//   name: string;
+//   description: string;
+//   value: "COPY_PASSWORD" | "ADD_NEW_PASSWORD";
+// };
 
-const choice: Option["value"] = await arg(
-  "What would you like to do?",
-  PM_OPTIONS
-);
+// const PM_OPTIONS: Option[] = [
+//   {
+//     name: "Copy Password",
+//     description: "Copy one of the saved passwords",
+//     value: "COPY_PASSWORD",
+//   },
+//   {
+//     name: "Add New Password",
+//     description: "Add a new password to the database",
+//     value: "ADD_NEW_PASSWORD",
+//   },
+// ];
 
-/** Doing operation on basis of choice */
-if (choice === "ADD_NEW_PASSWORD") {
-  addNewPassword();
-}
+// const choice: Option["value"] = await arg(
+//   "What would you like to do?",
+//   PM_OPTIONS
+// );
 
-if (choice === "COPY_PASSWORD") {
-  listAndCopyPassword();
-}
+// /** Doing operation on basis of choice */
+// if (choice === "ADD_NEW_PASSWORD") {
+//   addNewPassword();
+// }
 
-async function addNewPassword() {
-  const title = await arg({
-    placeholder: "Title",
-    hint: "Title for which your password belongs e.g Facebook etc.",
-  });
-  const password = await arg({
-    placeholder: "Password",
-    hint: `Password you want to save for ${title}`,
-  });
+// if (choice === "COPY_PASSWORD") {
+//   listAndCopyPassword();
+// }
 
-  /** Encrypting the password */
-  const encryptedPassword = cryptr.encrypt(password);
+// async function addNewPassword() {
+//   const title = await arg({
+//     placeholder: "Title",
+//     hint: "Title for which your password belongs e.g Facebook etc.",
+//   });
+//   const password = await arg({
+//     placeholder: "Password",
+//     hint: `Password you want to save for ${title}`,
+//   });
 
-  const id = nanoid(5);
-  const newPassword = { id, title, password: encryptedPassword };
-  passwords.push(newPassword);
+//   /** Encrypting the password */
+//   const encryptedPassword = cryptr.encrypt(password);
 
-  /** Saving the password in db */
-  await write();
-  // notify(`Password for ${title} added successfully!`);
-}
+//   const id = nanoid(5);
+//   const newPassword = { id, title, password: encryptedPassword };
+//   passwords.push(newPassword);
+
+//   /** Saving the password in db */
+//   await write();
+//   // notify(`Password for ${title} added successfully!`);
+// }
 
 async function listAndCopyPassword() {
   const passwordToCopy = await arg(
