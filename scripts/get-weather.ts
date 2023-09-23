@@ -1,4 +1,5 @@
 // Name: get weather
+
 import "@johnlindquist/kit";
 
 import { AsyncWeather } from "@cicciosgamino/openweather-apis";
@@ -19,7 +20,12 @@ await weatherInstance
   .getTemperature()
   .then(async (temp) => {
     // notify(`${temp}°`);
-    notify({ title: "Weather", message: temp, wait: false });
+
+    notify({
+      title: "Weather",
+      message: temp + ` - Zip: ${cityZipCode}`,
+      wait: false,
+    });
   })
   .catch((error) => {
     notify(
