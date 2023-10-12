@@ -1,4 +1,3 @@
-// Shortcut: command option b
 // Menu: Bible Search 🔍
 // Description: 📖 Launch scripture based on input book, chapter, verse
 // Author: Pramod Jingade
