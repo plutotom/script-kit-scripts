@@ -77,8 +77,13 @@ let selectedFolder = await arg(
 if (selectedFolder.includes("Make New Folder")) {
   let folderName = await arg("Folder Name?");
   // Give new prompt asking for folder name, on return create new folder, cd into it, and open terminal at it
-  await $`mkdir ${basePath}/${folderName}`;
-  await $`code ${basePath}/${folderName}`;
+  if (isMac) {
+    await $`mkdir ${basePath}/${folderName}`;
+    await $`code ${basePath}/${folderName}`;
+  } else {
+    await $`mkdir ${basePath}\\${folderName}`;
+    await $`code ${basePath}\\${folderName}`;
+  }
 } else {
   // await edit(selectedFolder);
   await $`code ${selectedFolder}`;
