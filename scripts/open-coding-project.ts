@@ -81,8 +81,11 @@ if (selectedFolder.includes("Make New Folder")) {
     await $`mkdir ${basePath}/${folderName}`;
     await $`code ${basePath}/${folderName}`;
   } else {
-    await $`mkdir ${basePath}\\${folderName}`;
-    await $`code ${basePath}\\${folderName}`;
+    await dev(`mkdir ${basePath}\\${folderName}`);
+    let path = `${basePath}\\${folderName}`;
+
+    await $`mkdir ${path}`;
+    await $`code ${path}`;
   }
 } else {
   // await edit(selectedFolder);
