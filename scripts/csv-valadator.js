@@ -63,10 +63,10 @@ const config = {
   ],
 };
 
-// let file = await drop("Drop your PDF files to merge");
-// let path = await file[0].path;
+let fileFirst = await drop("Drop your PDF files to merge");
+let path = await fileFirst[0].path;
 
-path = "/Users/plutotom/Downloads/Highlights for The End of Apologetics.csv";
+// path = "/Users/plutotom/Downloads/Highlights for The End of Apologetics.csv";
 let file = await fs.readFileSync(path, "utf8");
 let csvData,
   error,
@@ -88,7 +88,6 @@ await CSVFileValidator(file, config)
 
 if (isError) {
   // error looks like htis Error: [{"rowIndex":2,"columnIndex":5,"message":"Location is not a valid number in the 2 row / 5 column"}]
-  // error.forEach(async (err) => {});
   let html = "<table>";
   html += "<tr><th>Row Index</th><th>Column Index</th><th>Message</th></tr>";
   await error.forEach(async (errorRow) => {
@@ -96,9 +95,6 @@ if (isError) {
   });
   html += "</table>";
   await div(md(html));
-  // log(`Error: ${JSON.stringify(error)} : ${JSON.stringify(csvData)}`);
 } else {
   await div(md(`All is good`));
 }
-
-// await div(md(`Done`));
