@@ -1,6 +1,5 @@
 // Menu: Password Manager
 // Description: Manager all your passwords justing using few keys
-// Shortcut: Command + Shift + J
 // Author: @rockingrohit9639
 // alias: pass
 
