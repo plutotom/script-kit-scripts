@@ -1,5 +1,5 @@
 // Name: apa page number
-// Snippet: ppp
+// Snippet:
 
 import "@johnlindquist/kit";
 
