@@ -24,12 +24,15 @@ let w = await widget(
     alwaysOnTop: true,
   }
 );
+// let corgi = await widget(`<img :src="url"/>`, {
+//   state: await getState(),
+// })
 
 // If the widget is clicked, close it
-await w.onClick(async () => {
-  await w.close();
-  await exit();
-});
+// await w.onClick(async () => {
+//   await w.close();
+//   await exit();
+// });
 
 // After 3 seconds, close the widget
 setTimeout(async () => {
