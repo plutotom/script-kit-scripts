@@ -6,7 +6,7 @@ let examplesDir = kenvPath("kenvs", "plutotom");
 cd(examplesDir);
 
 // await $`git stash`;
-await $`git pull`;
+// await $`git pull`;
 // await $`git stash pop`;
-
+await $`git status`;
 await mainScript();

@@ -1,4 +1,5 @@
 // Name: Open Recent VS Code Project
+// alias: vps
 
 import "@johnlindquist/kit";
 import { URL, fileURLToPath } from "url";

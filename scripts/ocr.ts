@@ -2,28 +2,27 @@
 // Description: Capture a screenshot and recognize the text using tesseract.js
 
 import "@johnlindquist/kit";
-const { createWorker } = await npm("tesseract.js");
-// import "tesseract.js";
+
 //both win and linux implementations were created by chatgpt (gpt4), without _any_ tests!! 😅
 const captureScreenshot = async () => {
-  const tmpFile = `/tmp/screenshot-${Date.now()}.png`;
+  const tmpFile = kenvTmpPath(`screenshot-${Date.now()}.png`);
+  const scriptFile = kenvTmpPath("script.ps1");
 
   if (isMac) {
     await exec(`screencapture -i ${tmpFile}`);
   } else if (isWin) {
-    try {
-      const psScript = `
-          Add-Type -AssemblyName System.Windows.Forms
-          [System.Windows.Forms.SendKeys]::SendWait('%{PRTSC}')
-          Start-Sleep -m 500
-          $clipboardData = Get-Clipboard -Format Image
-          $clipboardData.Save('${tmpFile}', [System.Drawing.Imaging.ImageFormat]::Png)
-        `;
-      await exec(`powershell -Command "${psScript.replace(/\n/g, "")}"`);
-    } catch {
-      log("error on windows");
-      await dev("error on windowns");
-    }
+    const psScript = `Add-Type -AssemblyName System.Windows.Forms;
+        [System.Windows.Forms.SendKeys]::SendWait('%{PRTSC}');
+        Start-Sleep -m 500;
+        $clipboardData = Get-Clipboard -Format Image;
+        $clipboardData.Save('${tmpFile}', [System.Drawing.Imaging.ImageFormat]::Png);`;
+
+    // Save to file as powershell inline parsing is tricky, there are special rules to this and it's a pain.
+    // We already have write on disk, so there's really no point in encoding it as a string.
+    await writeFile(scriptFile, psScript.replace(/\n/g, ""));
+
+    // Execute saved file
+    await exec(`powershell -File "${scriptFile}"`);
   } else if (isLinux) {
     // Check if gnome-screenshot is available
     try {
@@ -39,6 +38,7 @@ const captureScreenshot = async () => {
 };
 
 const recognizeText = async (filePath, language) => {
+  const { createWorker } = await npm("tesseract.js");
   const worker = await createWorker();
 
   await worker.loadLanguage(language);
